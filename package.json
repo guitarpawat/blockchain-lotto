@@ -1,0 +1,30 @@
+{
+  "name": "blockchain-lotto",
+  "version": "1.0.0",
+  "description": "Blockchain lottery using Ethereum smart contract",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guitarpawat/blockchain-lotto.git"
+  },
+  "author": "Pawat Nakpiphatkul, Noppawan Kulchol and Wuttipat Nilsiri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guitarpawat/blockchain-lotto/issues"
+  },
+  "homepage": "https://github.com/guitarpawat/blockchain-lotto#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^3.0.0",
+    "solc": "^0.5.16",
+    "truffle": "^5.1.10",
+    "web3": "^1.2.5"
+  }
+}
