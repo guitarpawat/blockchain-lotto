@@ -1,11 +1,10 @@
-const configModel = require("../model/config").instance;
 const ApplicationError = require("../errors/error_model");
 const logger = require('../logger').api;
 
 class ConfigService {
-    #configModel = configModel;
+    #nextLive = null;
 
-    setNextLive(reqBody) {
+    set nextLive(reqBody) {
         if(!reqBody.apiKey) {
             throw new ApplicationError(404, null, "apiKey is blank");
         }
@@ -15,15 +14,23 @@ class ConfigService {
         }
         let nextLive;
         try {
-            nextLive = new Date(reqBody.nextLive)
+            if(reqBody.nextLive == null) {
+                nextLive = null;
+            } else {
+                nextLive = new Date(reqBody.nextLive)
+            }
         } catch (e) {
             throw new ApplicationError(500, e, "error in parse the date");
         }
         if(isNaN(nextLive)) {
             throw new ApplicationError(500, null, "date is invalid");
         }
-        configModel.nextLive = nextLive;
-        logger.info(`nextLive has been set to ${nextLive.toString()}`)
+        this.#nextLive = nextLive;
+        logger.warn(`nextLive has been set to ${nextLive}`)
+    }
+
+    get nextLive() {
+        return this.#nextLive;
     }
 }
 

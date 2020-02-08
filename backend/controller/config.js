@@ -8,7 +8,7 @@ class ConfigController {
 
     init() {
         this.expressApp.put('/api/v1/config/nextLive', (req, res, next) => {
-            this.#configService.setNextLive(req.body);
+            this.#configService.nextLive = req.body;
             res.json();
             next();
         })
