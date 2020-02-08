@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     console.log('\n\nRandom contract call')
     contract.methods.rand().send({ from: process.argv[2] })
     .then(result => {
-        r = new Array()
+        r = []
         result.events.Result.forEach(element => {
             console.log(element.returnValues)
             r.push({index: parseInt(element.returnValues.i), result: ("000000" + element.returnValues.result).slice(-6)})

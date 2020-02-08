@@ -2,13 +2,13 @@
   "name": "blockchain-lotto",
   "version": "1.0.0",
   "description": "Blockchain lottery using Ethereum smart contract",
-  "main": "app.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,14 @@
   },
   "homepage": "https://github.com/guitarpawat/blockchain-lotto#readme",
   "dependencies": {
+    "body-parser": "latest",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^3.0.0",
     "express": "^4.17.1",
     "solc": "^0.5.16",
     "truffle": "^5.1.10",
-    "web3": "^1.2.5"
+    "web3": "^1.2.5",
+    "winston": "^3.2.1"
   }
 }
