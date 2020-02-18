@@ -19,14 +19,36 @@ if(!process.argv[2]) {
 
 app.get('/', (req, res) => {
     console.log('\n\nRandom contract call')
-    contract.methods.rand().send({ from: process.argv[2] })
+    contract.methods.rand(50).send({ from: process.argv[2], gasLimit: "1000000" })
     .then(result => {
-        r = []
-        result.events.Result.forEach(element => {
-            console.log(element.returnValues)
-            r.push({index: parseInt(element.returnValues.i), result: ("000000" + element.returnValues.result).slice(-6)})
-        });
-        res.json(r)
+        if(Array.isArray(result.events.Result)) {
+            r = []
+            result.events.Result.forEach(element => {
+                console.log(element.returnValues)
+                r.push(
+                    {
+                        index: parseInt(element.returnValues.i), 
+                        result1: element.returnValues.result1, 
+                        result2: element.returnValues.result2, 
+                        result3: element.returnValues.result3, 
+                        result4: element.returnValues.result4, 
+                        result5: element.returnValues.result5
+                    }
+                )
+            });
+            res.json(r)
+        } else {
+            res.json(
+                {
+                    index: parseInt(element.returnValues.i), 
+                    result1: element.returnValues.result1, 
+                    result2: element.returnValues.result2, 
+                    result3: element.returnValues.result3, 
+                    result4: element.returnValues.result4, 
+                    result5: element.returnValues.result5
+                }
+            )
+        }
     })
 
 })
