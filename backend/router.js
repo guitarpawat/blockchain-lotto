@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const errorHandler = require('./errors/error_handler');
+const cors = require('cors')
 
 const controller = require('./controller/controller');
 
@@ -10,6 +11,7 @@ const app = express();
 const DefaultPort = 3000;
 
 function initMiddleware() {
+    app.use(cors())
     app.use(bodyParser.json());
 }
 
