@@ -1,17 +1,17 @@
 const statusService = require('../service/status').instance;
 
 class StatusController {
-    #statusService = statusService;
+    
     constructor(expressApp) {
         this.expressApp = expressApp;
     }
 
     init() {
-        this.expressApp.get('/api/v1/status', (req, res, next) => {
-            res.json(this.#statusService.getStatus());
+        this.expressApp.get('/api/v1/status', async (req, res, next) => {
+            res.json(await statusService.getStatus('local'));
             next();
         })
     }
 }
 
-module.exports.StatusController = StatusController;
+module.exports.instance = StatusController;

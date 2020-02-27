@@ -29,6 +29,7 @@
     "chai-bignumber": "^3.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.9.2",
     "solc": "^0.5.16",
     "truffle": "^5.1.13",
     "web3": "^1.2.5",

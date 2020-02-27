@@ -1,19 +1,12 @@
-const ApplicationError = require("../errors/error_model");
 const configService = require('./config').instance;
 
 class StatusService {
-    #isLive = false;
-
-    getStatus() {
-        let isLive = this.#isLive;
-        if(this.#isLive) {
-            // TODO: Custom return when drawing
-        } else {
-            return {
-                isLive: isLive,
-                nextLive: configService.nextLive
-            }
+    async getStatus(env) {
+        let config = await configService.getConfiguration(env);
+        if(typeof config.nextLive === 'undefined') {
+            config.nextLive = null;
         }
+        return {network: config.env, nextLive: config.nextLive};
     }
 }
 
