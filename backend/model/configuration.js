@@ -5,10 +5,11 @@ const configurationSchema = new Schema({
   env:  String,
   nextLive: Date,
   contractAddress: String,
+  confirmationBlocks: Number,
   requiredInfura: Boolean,
   infuraAPI: String,
   mnemonic: String
-}, { _id: false})
+})
 
 const configurationModel = mongoose.model('Configuration', configurationSchema);
 

@@ -6,7 +6,7 @@ class StatusService {
         if(typeof config.nextLive === 'undefined') {
             config.nextLive = null;
         }
-        return {network: config.env, nextLive: config.nextLive};
+        return {network: config.env, nextLive: config.nextLive, contractAddress: config.contractAddress};
     }
 }
 
