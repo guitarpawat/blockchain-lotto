@@ -11,6 +11,7 @@ class Controller {
         this.startTime = startTime;
         this.callingBlocks = callBlocks;
         this.confirmationNeeds = confirmationNeeds;
+        this.started = false;
         this.finished = false;
         this.saveHistory = saveHistory;
         this.startBlock = -1;
@@ -22,9 +23,11 @@ class Controller {
             this.finished = true;
         })
         this.contractAddress = web3Wrapper.contractAddress;
+        start();
     }
 
     run() {
+        if(!started) return;
         let pendingExecute = -1;
         for(let i=0; i<this.callingBlocks.length; i++) {
             if(this.callingBlocks[i].state === State.PENDING_EXECUTE) {
@@ -48,8 +51,7 @@ class Controller {
             .filter(ele => ele.state !== State.COMPLETED)
             .length === 0) {
                 this.saveHistory(this.callingBlocks, 'local', this.startTime, this.contractAddress);
-                this.finished = true;
-                logger.blockchain.info('lottery drawing session finished');
+                setCompleted();
         }
     }
 
@@ -83,6 +85,32 @@ class Controller {
                 callBlock.results = results;
                 callBlock.confirmResult(receipt.blockNumber + this.confirmationNeeds);
             }
+        })
+        .catch(err => {
+            callBlock.resetOnError();
+            logger.blockchain.debug('error: ', err)
+        });
+    }
+
+    start() {
+        web3Wrapper.contract.methods.setBlock()
+        .send({ from: web3Wrapper.defaultAccount, gasLimit: "5500000", gasPrice: "30000000000" })
+        .on('receipt', receipt => {
+            this.started = true;
+            logger.blockchain.info('lottery drawing session started');
+        })
+        .catch(err => {
+            callBlock.resetOnError();
+            logger.blockchain.debug('error: ', err)
+        });
+    }
+
+    setCompleted() {
+        web3Wrapper.contract.methods.setCompleted()
+        .send({ from: web3Wrapper.defaultAccount, gasLimit: "5500000", gasPrice: "30000000000" })
+        .on('receipt', receipt => {
+            this.finished = true;
+            logger.blockchain.info('lottery drawing session finished');
         })
         .catch(err => {
             callBlock.resetOnError();
@@ -224,10 +252,10 @@ let save = function saveHistory(callBlocks, env, startTime, contractAddress) {
     }
 
     lastTwo = resolveBlock(
-        callBlocks[12*i].results[0], callBlocks[12*i + 1].results[0], callBlocks[12*i + 2].results[0],
-            callBlocks[12*i + 3].results[0], callBlocks[12*i + 4].results[0], callBlocks[12*i + 5].results[0],
-            callBlocks[12*i + 6].results[0], callBlocks[12*i + 7].results[0], callBlocks[12*i + 8].results[0],
-            callBlocks[12*i + 9].results[0], callBlocks[12*i + 10].results[0], callBlocks[12*i + 11].results[0]
+        callBlocks[12*i].results[4], callBlocks[12*i + 1].results[4], callBlocks[12*i + 2].results[4],
+            callBlocks[12*i + 3].results[4], callBlocks[12*i + 4].results[4], callBlocks[12*i + 5].results[4],
+            callBlocks[12*i + 6].results[4], callBlocks[12*i + 7].results[4], callBlocks[12*i + 8].results[4],
+            callBlocks[12*i + 9].results[4], callBlocks[12*i + 10].results[4], callBlocks[12*i + 11].results[4]
     ).substring(4, 6);
 
     History.updateOne({

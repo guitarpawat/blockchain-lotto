@@ -2,13 +2,26 @@ pragma solidity ^0.5.14;
 
 contract Random {
 
-    function rand(uint8 offset, uint8 retry, uint8 items) public {
-        uint32 seed = uint32(uint256(keccak256(abi.encodePacked(blockhash(block.number - 1)))));
+    address private owner;
+    uint256 private nextBlock;
+
+    constructor() public {
+        owner = msg.sender;
+        nextBlock = 0;
+    }
+
+    modifier onlyOwner() {
+        require(owner == msg.sender, "only owner is allowed to call this method");
+        _;
+    }
+
+    function rand(uint8 offset, uint8 items) public onlyOwner {
+        uint32 seed = uint32(uint256(keccak256(abi.encodePacked(blockhash(nextBlock)))));
         for(uint8 i = 0; i < items; i += 5) {
             seed ^= seed << 13;
-        	seed ^= seed >> 17;
-        	seed ^= seed << 5;
-            emit Result(offset, retry, i,
+            seed ^= seed >> 17;
+            seed ^= seed << 5;
+            emit Result(offset, i,
                 uint8((seed % 100) / 10),
                 uint8((seed % 1000) / 100),
                 uint8((seed % 10000) / 1000),
@@ -16,6 +29,15 @@ contract Random {
                 uint8((seed % 1000000) / 100000)
             );
         }
+        setBlock();
+    }
+
+    function setCompleted() public onlyOwner {
+        nextBlock = 0;
+    }
+
+    function setBlock() public onlyOwner {
+        nextBlock = block.number;
     }
 
     function combine(
@@ -42,5 +64,5 @@ contract Random {
         return (digit1 * 100000) + (digit2 * 10000) + (digit3 * 1000) + (digit4 * 100) + (digit5 * 10) + digit6;
     }
 
-    event Result(uint8 offset, uint8 retry, uint8 i, uint8 result1, uint8 result2, uint8 result3, uint8 result4, uint8 result5);
+    event Result(uint8 offset, uint8 i, uint8 result1, uint8 result2, uint8 result3, uint8 result4, uint8 result5);
 }
