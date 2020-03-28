@@ -3,17 +3,17 @@ const logger = require('../logger');
 const CallBlock = require('./call_block');
 const web3Wrapper = require('./web3');
 const State = require('./state')
+const Status = require('./status');
 const Result = require('../model/result')
-const History = require('../model/history')
+const updateDBFunc = require('./db_update').updateDB;
 
 class Controller {
-    constructor(callBlocks, startTime, confirmationNeeds, saveHistory) {
+    constructor(callBlocks, startTime, confirmationNeeds) {
         this.startTime = startTime;
         this.callingBlocks = callBlocks;
         this.confirmationNeeds = confirmationNeeds;
         this.started = false;
         this.finished = false;
-        this.saveHistory = saveHistory;
         this.startBlock = -1;
         this.getCurrentBlock()
         .then(res => this.startBlock = res)
@@ -23,11 +23,11 @@ class Controller {
             this.finished = true;
         })
         this.contractAddress = web3Wrapper.contractAddress;
-        start();
+        this.start();
     }
 
     run() {
-        if(!started) return;
+        if(!this.started) return;
         let pendingExecute = -1;
         for(let i=0; i<this.callingBlocks.length; i++) {
             if(this.callingBlocks[i].state === State.PENDING_EXECUTE) {
@@ -50,14 +50,13 @@ class Controller {
         if (this.callingBlocks
             .filter(ele => ele.state !== State.COMPLETED)
             .length === 0) {
-                this.saveHistory(this.callingBlocks, 'local', this.startTime, this.contractAddress);
-                setCompleted();
+                this.setCompleted();
         }
     }
 
     callContract(callBlock) {
         callBlock.callContract();
-        web3Wrapper.contract.methods.rand(callBlock.offset, callBlock.retries, callBlock.size)
+        web3Wrapper.contract.methods.rand(callBlock.offset, callBlock.size)
         .send({ from: web3Wrapper.defaultAccount, gasLimit: "5500000", gasPrice: "30000000000" })
         .on('receipt', receipt => {
             callBlock.executeContract(receipt.blockNumber);
@@ -130,7 +129,7 @@ class Controller {
         Result.updateOne(filter, update, {upsert: true}, (error, writeOpResult) => {
             if(error) {
                 logger.mongo.error(`cannot update result: `, error);
-                logger.mongo.error(`offset=${callBlock.offset}, retries=${callBlock.retries}`);
+                logger.mongo.error(`offset=${callBlock.offset}`);
                 logger.mongo.error(`result=${callBlock.results}`);
             } else {
                 callBlock.setComplete();
@@ -162,133 +161,6 @@ function initCallBlocks() {
     return callBlocks;
 }
 
-let save = function saveHistory(callBlocks, env, startTime, contractAddress) {
-    let fifth = new Array();
-    let forth = new Array();
-    let third = new Array();
-    let second = new Array();
-    let first = "";
-    let besideFirst = new Array();
-    let frontThree = new Array();
-    let lastThree = new Array();
-    let lastTwo = "";
-
-    for(let i=0; i<2; i++) {
-        for(let j=0; j<50; j++) {
-            fifth.push(resolveBlock(
-                callBlocks[12*i].results[j], callBlocks[12*i + 1].results[j], callBlocks[12*i + 2].results[j],
-                callBlocks[12*i + 3].results[j], callBlocks[12*i + 4].results[j], callBlocks[12*i + 5].results[j],
-                callBlocks[12*i + 6].results[j], callBlocks[12*i + 7].results[j], callBlocks[12*i + 8].results[j],
-                callBlocks[12*i + 9].results[j], callBlocks[12*i + 10].results[j], callBlocks[12*i + 11].results[j]
-            ));
-        }
-    }
-
-    let i = 2;
-    for(let j=0; j<50; j++) {
-        forth.push(resolveBlock(
-            callBlocks[12*i].results[j], callBlocks[12*i + 1].results[j], callBlocks[12*i + 2].results[j],
-                callBlocks[12*i + 3].results[j], callBlocks[12*i + 4].results[j], callBlocks[12*i + 5].results[j],
-                callBlocks[12*i + 6].results[j], callBlocks[12*i + 7].results[j], callBlocks[12*i + 8].results[j],
-                callBlocks[12*i + 9].results[j], callBlocks[12*i + 10].results[j], callBlocks[12*i + 11].results[j]
-        ));
-    }
-
-    i = 3;
-    for(let j=0; j<10; j++) {
-        third.push(resolveBlock(
-            callBlocks[12*i].results[j], callBlocks[12*i + 1].results[j], callBlocks[12*i + 2].results[j],
-                callBlocks[12*i + 3].results[j], callBlocks[12*i + 4].results[j], callBlocks[12*i + 5].results[j],
-                callBlocks[12*i + 6].results[j], callBlocks[12*i + 7].results[j], callBlocks[12*i + 8].results[j],
-                callBlocks[12*i + 9].results[j], callBlocks[12*i + 10].results[j], callBlocks[12*i + 11].results[j]
-        ));
-    }
-
-    for(let j=10; j<15; j++) {
-        second.push(resolveBlock(
-            callBlocks[12*i].results[j], callBlocks[12*i + 1].results[j], callBlocks[12*i + 2].results[j],
-                callBlocks[12*i + 3].results[j], callBlocks[12*i + 4].results[j], callBlocks[12*i + 5].results[j],
-                callBlocks[12*i + 6].results[j], callBlocks[12*i + 7].results[j], callBlocks[12*i + 8].results[j],
-                callBlocks[12*i + 9].results[j], callBlocks[12*i + 10].results[j], callBlocks[12*i + 11].results[j]
-        ));
-    }
-
-    i = 4;
-    first = resolveBlock(
-        callBlocks[12*i].results[0], callBlocks[12*i + 1].results[0], callBlocks[12*i + 2].results[0],
-                callBlocks[12*i + 3].results[0], callBlocks[12*i + 4].results[0], callBlocks[12*i + 5].results[0],
-                callBlocks[12*i + 6].results[0], callBlocks[12*i + 7].results[0], callBlocks[12*i + 8].results[0],
-                callBlocks[12*i + 9].results[0], callBlocks[12*i + 10].results[0], callBlocks[12*i + 11].results[0]
-    );
-
-    let beside1 = parseInt(first) - 1;
-    if(beside1 < 0) {
-        beside1 = 999999;
-    }
-    let beside2 = parseInt(first) + 1;
-    if(beside2 > 999999) {
-        beside2 = 0;
-    }
-    besideFirst.push(("000000" + beside1).slice(-6));
-    besideFirst.push(("000000" + beside2).slice(-6));
-
-    i = 5;
-    for(let j=0; j<2; j++) {
-        frontThree.push(resolveBlock(
-            callBlocks[12*i].results[j], callBlocks[12*i + 1].results[j], callBlocks[12*i + 2].results[j],
-                callBlocks[12*i + 3].results[j], callBlocks[12*i + 4].results[j], callBlocks[12*i + 5].results[j],
-                callBlocks[12*i + 6].results[j], callBlocks[12*i + 7].results[j], callBlocks[12*i + 8].results[j],
-                callBlocks[12*i + 9].results[j], callBlocks[12*i + 10].results[j], callBlocks[12*i + 11].results[j]
-        ).substring(0, 3));
-    }
-
-    for(let j=2; j<4; j++) {
-        lastThree.push(resolveBlock(
-            callBlocks[12*i].results[j], callBlocks[12*i + 1].results[j], callBlocks[12*i + 2].results[j],
-                callBlocks[12*i + 3].results[j], callBlocks[12*i + 4].results[j], callBlocks[12*i + 5].results[j],
-                callBlocks[12*i + 6].results[j], callBlocks[12*i + 7].results[j], callBlocks[12*i + 8].results[j],
-                callBlocks[12*i + 9].results[j], callBlocks[12*i + 10].results[j], callBlocks[12*i + 11].results[j]
-        ).substring(3, 6));
-    }
-
-    lastTwo = resolveBlock(
-        callBlocks[12*i].results[4], callBlocks[12*i + 1].results[4], callBlocks[12*i + 2].results[4],
-            callBlocks[12*i + 3].results[4], callBlocks[12*i + 4].results[4], callBlocks[12*i + 5].results[4],
-            callBlocks[12*i + 6].results[4], callBlocks[12*i + 7].results[4], callBlocks[12*i + 8].results[4],
-            callBlocks[12*i + 9].results[4], callBlocks[12*i + 10].results[4], callBlocks[12*i + 11].results[4]
-    ).substring(4, 6);
-
-    History.updateOne({
-        env:  env,
-        startTime: startTime,
-        contractAddress: contractAddress,
-        first: first,
-        besideFirst: besideFirst,
-        second: second,
-        third: third,
-        forth: forth,
-        fifth: fifth,
-        frontThree: frontThree,
-        lastThree: lastThree,
-        lastTwo: lastTwo
-    }, {}, {upsert: true}, (err, writeOpResult) => {
-        if(err) {
-            logger.mongo.error('cannot save result to history: ', err);
-        }
-    });
-    logger.mongo.info('successful insert result history')
-}
-
-function resolveBlock(i01, i02, i03, i04, i05, i06, i07, i08, i09, i10, i11, i12) {
-    let digit1 = (i01 % 5) + (5 * (i02 % 2));
-    let digit2 = (i03 % 5) + (5 * (i04 % 2));
-    let digit3 = (i05 % 5) + (5 * (i06 % 2));
-    let digit4 = (i07 % 5) + (5 * (i08 % 2));
-    let digit5 = (i09 % 5) + (5 * (i10 % 2));
-    let digit6 = (i11 % 5) + (5 * (i12 % 2));
-    return `${(digit1)}${(digit2)}${(digit3)}${(digit4)}${(digit5)}${digit6}`;
-}
-
 let controller;
 
 async function doJob() {
@@ -299,26 +171,40 @@ async function doJob() {
         logger.mongo.error('error occured: ', e);
         return;
     }
-    if(!config.nextLive && (!controller || controller.finished)) {
-        logger.blockchain.debug('nextLive is not set')
-        return;
-    }
-    let nextLive = new Date(config.nextLive).getTime();
-    if(new Date().getTime() >= nextLive) {
-        if(!controller || (controller.finished && controller.startTime !== nextLive)) {
-            controller = new Controller(initCallBlocks(), nextLive, config.confirmationBlocks, save);
+
+    if(!config.status || config.status === Status.FINISHED) {
+        controller = null;
+    } else if(config.status === Status.LIVE) {
+        if(controller) {
+            controller.run();
+        } else {
+            logger.blockchain.error('something must went wrong while last live');
+        }
+    } else if(config.status === Status.PENDING) {
+        if(!config.nextLive) {
+            logger.blockchain.debug('nextLive is not set')
+            return;
+        }
+        let nextLive = new Date(config.nextLive).getTime();
+        if(new Date().getTime() >= nextLive) {
+            controller = new Controller(initCallBlocks(), nextLive, config.confirmationBlocks);
+            try {
+                await configurationService.updateStatus('local', Status.LIVE);
+            } catch(e) {
+                logger.mongo.error('cannot update status from pending to live', e);
+            }
             logger.blockchain.info("init new session for lottery drawing");
         }
-        if(!controller.finished && controller.startTime === nextLive) {
-            controller.run();
-        }
+    } else {
+        logger.blockchain.error('invalid status in db');
     }
 }
 
 const runner = function() {
     try {
         web3Wrapper.start();
-        setInterval(() => doJob(), 2500);
+        setInterval(() => doJob(), 4000);
+        setInterval(() => updateDBFunc(), 10000);
     } catch(e) {
         logger.blockchain.error('error occured: ', e);
         process.exit(1);

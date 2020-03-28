@@ -8,7 +8,8 @@ const configurationSchema = new Schema({
   confirmationBlocks: Number,
   requiredInfura: Boolean,
   infuraAPI: String,
-  mnemonic: String
+  mnemonic: String,
+  status: String
 })
 
 const configurationModel = mongoose.model('Configuration', configurationSchema);
