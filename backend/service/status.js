@@ -1,4 +1,6 @@
 const configService = require('./config').instance;
+const resultService = require('./result').instance;
+const Status = require('../blockchain/status');
 
 class StatusService {
     async getStatus(env) {
@@ -6,7 +8,21 @@ class StatusService {
         if(typeof config.nextLive === 'undefined') {
             config.nextLive = null;
         }
-        return {network: config.env, nextLive: config.nextLive, contractAddress: config.contractAddress};
+        const isLive = (config.status === Status.LIVE);
+        let liveId = null;
+        if (isLive) {
+            let result = await resultService.getResultByEnvAndTime(config.nextLive)
+            if(result && result._id) {
+                liveId = result._id;
+            }
+        }
+        return {
+            network: config.env, 
+            nextLive: config.nextLive, 
+            isLive: isLive,
+            liveId: liveId,
+            contractAddress: config.contractAddress
+        };
     }
 }
 

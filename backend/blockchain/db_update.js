@@ -3,13 +3,14 @@ const logger = require('../logger');
 const Status = require('./status');
 const Result = require('../model/result')
 const History = require('../model/history')
+const Constants = require('../constants');
 
 const blankResults = {result: []};
 
 async function updateDB() {
     let config;
     try {
-        config = await configurationService.getConfiguration('local');
+        config = await configurationService.getConfiguration();
     } catch(e) {
         logger.mongo.error('error occured while getting config: ', e);
         return;
@@ -20,7 +21,7 @@ async function updateDB() {
     let startTime = config.nextLive.getTime();
     let result;
     try {
-        result = await Result.findOne({env: 'local', startTime: startTime})
+        result = await Result.findOne({env: Constants.env, startTime: startTime})
     } catch(e) {
         logger.mongo.error('error occured while getting result: ', e);
         return;
@@ -29,11 +30,11 @@ async function updateDB() {
         logger.mongo.debug('status=live but no result');
         return;
     }
-    let finished = saveHistory(result.results, 'local', startTime, config.contractAddress);
+    let finished = saveHistory(result.results, Constants.env, startTime, config.contractAddress);
 
     if(finished) {
         try {
-            await configurationService.updateStatus('local', Status.FINISHED)
+            await configurationService.updateStatus(Status.FINISHED)
         } catch(e) {
             logger.mongo.error('cannot update status from live to finished', e);
         }

@@ -19,11 +19,25 @@
  */
 
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-// const infuraKey = "fj4jll3k.....";
-//
 const fs = require('fs');
-const mnemonic = fs.readFileSync("mnemonic.txt").toString().trim();
-const infuraApi = fs.readFileSync("infura_api.txt").toString().trim();
+
+let network = 'local';
+for(let i=0; i<process.argv.length; i++) {
+  if(process.argv[i] === '--network') {
+    network = process.argv[i+1];
+    break;
+  }
+}
+
+let mnemonic;
+let infuraApi;
+
+if(network !== 'local') {
+  mnemonic = fs.readFileSync("mnemonic.txt").toString().trim();
+  infuraApi = fs.readFileSync("infura_api.txt").toString().trim();
+}
+
+
 
 module.exports = {
   /**

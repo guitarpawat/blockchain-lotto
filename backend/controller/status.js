@@ -8,7 +8,7 @@ class StatusController {
 
     init() {
         this.expressApp.get('/api/v1/status', async (req, res, next) => {
-            res.json(await statusService.getStatus('local'));
+            res.json(await statusService.getStatus());
             next();
         })
     }

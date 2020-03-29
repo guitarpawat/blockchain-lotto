@@ -6,6 +6,7 @@ const State = require('./state')
 const Status = require('./status');
 const Result = require('../model/result')
 const updateDBFunc = require('./db_update').updateDB;
+const Constants = require('../constants');
 
 class Controller {
     constructor(callBlocks, startTime, confirmationNeeds) {
@@ -118,7 +119,7 @@ class Controller {
     }
 
     saveToDatabase(callBlock) {
-        let filter = {env: 'local', startTime: this.startTime, contractAddress: web3Wrapper.contractAddress}
+        let filter = {env: Constants.env, startTime: this.startTime, contractAddress: web3Wrapper.contractAddress}
         let update = {$push: {results: {
             offset: callBlock.offset,
             retries: callBlock.retries,
@@ -166,7 +167,7 @@ let controller;
 async function doJob() {
     let config;
     try {
-        config = await configurationService.getConfiguration('local');
+        config = await configurationService.getConfiguration();
     } catch(e) {
         logger.mongo.error('error occured: ', e);
         return;
@@ -189,7 +190,7 @@ async function doJob() {
         if(new Date().getTime() >= nextLive) {
             controller = new Controller(initCallBlocks(), nextLive, config.confirmationBlocks);
             try {
-                await configurationService.updateStatus('local', Status.LIVE);
+                await configurationService.updateStatus(Status.LIVE);
             } catch(e) {
                 logger.mongo.error('cannot update status from pending to live', e);
             }
@@ -203,7 +204,7 @@ async function doJob() {
 const runner = function() {
     try {
         web3Wrapper.start();
-        setInterval(() => doJob(), 4000);
+        setInterval(() => doJob(), 10000);
         setInterval(() => updateDBFunc(), 10000);
     } catch(e) {
         logger.blockchain.error('error occured: ', e);

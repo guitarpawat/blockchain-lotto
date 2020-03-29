@@ -6,9 +6,6 @@ const configurationSchema = new Schema({
   nextLive: Date,
   contractAddress: String,
   confirmationBlocks: Number,
-  requiredInfura: Boolean,
-  infuraAPI: String,
-  mnemonic: String,
   status: String
 })
 
