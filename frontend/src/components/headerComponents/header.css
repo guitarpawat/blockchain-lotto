@@ -1,0 +1,28 @@
+
+.navbar-container {
+    right: 0;
+}
+
+.nav-space {
+    margin-right: 20px;
+}
+
+.ui.basic.button {
+    border-radius: 0;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.nav-center {
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+

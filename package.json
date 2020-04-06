@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "concurrently --kill-others \"cd frontend && npm start\" \"node index.js\"",
+    "frontend": "cd frontend && npm start",
+    "backend": "node index.js",
     "contract-dev": "node app.js"
   },
   "repository": {
@@ -27,6 +29,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^3.0.0",
+    "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.2",

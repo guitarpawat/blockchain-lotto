@@ -8,7 +8,7 @@ const logger = require('./logger').api;
 
 const express = require('express');
 const app = express();
-const DefaultPort = 3000;
+const DefaultPort = 3001;
 
 function initMiddleware() {
     app.use(cors())

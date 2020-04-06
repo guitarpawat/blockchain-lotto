@@ -204,8 +204,8 @@ async function doJob() {
 const runner = function() {
     try {
         web3Wrapper.start();
-        setInterval(() => doJob(), 10000);
-        setInterval(() => updateDBFunc(), 10000);
+        setInterval(() => doJob(), 5000);
+        setInterval(() => updateDBFunc(), 5000);
     } catch(e) {
         logger.blockchain.error('error occured: ', e);
         process.exit(1);
