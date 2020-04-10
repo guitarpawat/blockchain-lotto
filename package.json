@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently --kill-others \"cd frontend && npm start\" \"node index.js\"",
+    "start-testnet": "concurrently --kill-others \"cd frontend && npm start\" \"node index.js ropsten\"",
     "frontend": "cd frontend && npm start",
     "backend": "node index.js",
     "contract-dev": "node app.js"

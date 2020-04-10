@@ -19,9 +19,8 @@ class Controller {
         this.getCurrentBlock()
         .then(res => this.startBlock = res)
         .catch(err => {
-            logger.blockchain.error('lost connection to the blockchain network, the lottery session will not start!');
+            logger.blockchain.error('cannot connect to the blockchain network');
             logger.blockchain.error('caused by: ', err);
-            this.finished = true;
         })
         this.contractAddress = web3Wrapper.contractAddress;
         this.start();
@@ -59,10 +58,10 @@ class Controller {
         callBlock.callContract();
         web3Wrapper.contract.methods.rand(callBlock.offset, callBlock.size)
         .send({ from: web3Wrapper.defaultAccount, gasLimit: "5500000", gasPrice: "30000000000" })
-        .on('receipt', receipt => {
-            callBlock.executeContract(receipt.blockNumber);
-        })
         .on('confirmation', (confirmationNumber, receipt) => {
+            if(confirmationNumber === 2) {
+                callBlock.executeContract(receipt.blockNumber);
+            }
             if(confirmationNumber === this.confirmationNeeds) {
                 let results = new Array(callBlock.size);
                 if(Array.isArray(receipt.events.Result)) {
@@ -96,8 +95,13 @@ class Controller {
         web3Wrapper.contract.methods.setBlock()
         .send({ from: web3Wrapper.defaultAccount, gasLimit: "5500000", gasPrice: "30000000000" })
         .on('receipt', receipt => {
-            this.started = true;
-            logger.blockchain.info('lottery drawing session started');
+            logger.blockchain.info('lottery drawing session contract called');
+        })
+        .on('confirmation', (confirmationNumber, receipt) => {
+            if(confirmationNumber === 2) {
+                this.started = true;
+                logger.blockchain.info('lottery drawing session started');
+            }
         })
         .catch(err => {
             callBlock.resetOnError();
@@ -188,6 +192,7 @@ async function doJob() {
         }
         let nextLive = new Date(config.nextLive).getTime();
         if(new Date().getTime() >= nextLive) {
+            if(controller && !controller.finished) return;
             controller = new Controller(initCallBlocks(), nextLive, config.confirmationBlocks);
             try {
                 await configurationService.updateStatus(Status.LIVE);

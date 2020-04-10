@@ -16,7 +16,7 @@ contract Random {
     }
 
     function rand(uint8 offset, uint8 items) public onlyOwner {
-        uint32 seed = uint32(uint256(blockhash(nextBlock)));
+        uint32 seed = uint32(uint256(blockhash(nextBlock + 1)));
         for(uint8 i = 0; i < items; i += 5) {
             seed ^= seed << 13;
             seed ^= seed >> 17;
@@ -37,7 +37,7 @@ contract Random {
     }
 
     function setBlock() public onlyOwner {
-        nextBlock = block.number;
+        nextBlock = block.number + 1;
     }
 
     function combine(
