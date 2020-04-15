@@ -53,6 +53,19 @@ class DrawPage extends Component {
                     // console.log(this.state.isLive);
                     // console.log(this.state.nextDate);
                     console.log(this.state.full_data.nextLive);
+
+                    if (this.state.full_data.isLive){
+                      axios
+                      .get("http://localhost:3001/api/v1/results/"+this.state.full_data.liveId)
+                      .then(res =>{
+                        console.log(res.data)
+                        const number_data = res.data;
+                        this.setState(
+                          {
+                            number_data: number_data,
+                          })
+                      })
+                    }
                   
                     // console.log("con:" + this.state.threadPoperties[0].country);
                 }
@@ -60,7 +73,7 @@ class DrawPage extends Component {
             
         })
         .catch(err => console.log(err));
-  }  
+  }
   
   render() {
     
