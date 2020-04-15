@@ -1,0 +1,27 @@
+.hr-rule {
+    width: 800px;
+    height: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 130px;
+    margin-bottom: auto;
+    /* height: 10px; */
+    background-color: transparent !important;
+    border: 2px solid white;
+  }
+
+.txt{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+    text-shadow: 2px 2px 2px rgb(255, 255, 255);
+    text-align: center;
+    line-height: 1.6;
+}  
