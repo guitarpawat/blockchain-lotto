@@ -6,21 +6,36 @@ class CountdownTimer extends React.Component {
 
   constructor(props) {
     super(props);
+
+    // console.log("props: "+props.then);
+    const { then, timeFormat } = this.props
     
+
     this.state = {
       days: undefined,
       hours: undefined,
       minutes: undefined,
-      seconds: undefined
+      seconds: undefined,
+      then: undefined
     };    
   }  
-
+//   "04 17 2020, 6:33 pm", "MM DD YYYY, h:mm a"
     componentDidMount() {
-        this.interval = setInterval(() => {
-            const { timeTillDate, timeFormat } = this.props;
-            const then = moment("05 25 2020, 6:00 am", "MM DD YYYY, h:mm a");
+        
+        console.log("format_prop: "+this.props.timeFormat);
+        console.log("then_prop: "+this.props.then);
+        
+        // const { timeTillDate, timeFormat } = this.props;
+		// const then = moment("04 17 2020, 6:00 pm", "MM DD YYYY, h:mm a");
+        // const { thenTime } = moment(this.props.then, this.props.timeFormat);   
+        // const { timeFormat } = "MM DD YYYY, h:mm a";
+        // const then = moment(timeTillDate, timeFormat);
+        this.interval = setInterval(() => { 
+            // this.setState({ then: this.props.then});
             const now = moment();
-            const countdown = moment(then - now);
+            console.log("now:" + now);
+            console.log("then:" + this.props.then);
+            const countdown = moment(this.props.then - now).add({hours: -31});
             const days = countdown.format('D');
             const hours = countdown.format('HH');
             const minutes = countdown.format('mm');
@@ -40,7 +55,7 @@ class CountdownTimer extends React.Component {
         const { days, hours, minutes, seconds } = this.state;
 
         // Mapping the date values to radius values
-        const daysRadius = mapNumber(days, 30, 0, 0, 360);
+        const daysRadius = mapNumber(days, 31, 0, 0, 360);
         const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
         const minutesRadius = mapNumber(minutes, 60, 0, 0, 360);
         const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
