@@ -28,29 +28,26 @@ class DrawPage extends Component {
         .then(res => {
             console.log(res.data);
             const full_data = res.data;
-            console.log("nextLive_from_full: " + full_data.nextLive)
+            // console.log("nextLive_from_full: " + full_data.nextLive)
             this.setState(
                 {
-                  nextLive: moment(full_data.nextLive).subtract(7,"hours"), full_data
+                  nextLive: moment(full_data.nextLive),
+                  full_data,
                 },
                 () => {
-                    
                     // if (this.state.full_data.isLive){
                       axios
+                      // 5e707e43068877ec5e53fa55
                       // +this.state.full_data.liveId
                       .get("http://localhost:3001/api/v1/results/5e707e43068877ec5e53fa55")
                       .then(res =>{
                         console.log(res.data)
                         const number_data = res.data;
-                        // console.log("num_data: "+number_data)
-                        // setInterval(()=>{
                           this.setState(
                             {
                               number_data: number_data,
-                            })
-                        // }, 1000)
-                        
-                        })
+                            })                        
+                          })
                     // }
                 }
             );
@@ -67,6 +64,16 @@ class DrawPage extends Component {
       let {number_data, nextLive} = this.state
       console.log("num_render: "+number_data)
       console.log("nextLive: "+nextLive);
+
+      let page;
+      if((nextLive != null) && (number_data.fifth == undefined)){
+        console.log("no data")
+        page = <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>
+      } else if((nextLive != null) && (number_data.fifth != null)){
+        console.log("have data")
+        page = number_data.forth ? (<FifthPrize data={number_data}/>) : <RulePage/>
+      }
+
       return (
         
           <div>
@@ -75,16 +82,8 @@ class DrawPage extends Component {
             {/* {nextLive ? (<CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>) : <h1>...Loading...</h1>} */}
             {/* {this.state.isLive ? (<Fifth/>) : <h1><Rule/></h1>}   */}
             
-            {/* this.state.nextLive.format("MM DD YYYY, h:mm a") */}
-            {/* <Timer then={nextLive}/> */}
-            {/* <Timer
-              timeTillDate={this.nextLive}
-              timeFormat="MM DD YYYY, h:mm a"
-              /> */}
-            {/* <Rule/>   */}
-            {/* <FifthPrize count={counter}
-                        number={number_data.first}/>         */}
-            <FifthPrize data={number_data}/> 
+            {page}
+            
           </div>
           
       );

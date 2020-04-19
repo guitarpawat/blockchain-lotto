@@ -4,7 +4,6 @@ import 'react-awesome-button/dist/themes/theme-blue.css';
 import {
   AwesomeButton
 } from 'react-awesome-button';
-import lotBg from './lot-bg.png';
 
 class Homepage extends Component {    
 
@@ -12,7 +11,6 @@ class Homepage extends Component {
         return (
             
             <div>              
-              {/* <img className="image" src={lotBg} alt="lotBg" id="bg" /> */}
               <div className="hr">
               <div className="ltr-center">
                 <div id="dots">

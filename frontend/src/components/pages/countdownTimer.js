@@ -25,13 +25,7 @@ class CountdownTimer extends React.Component {
         console.log("format_prop: "+this.props.timeFormat);
         console.log("then_prop: "+this.props.then);
         
-        // const { timeTillDate, timeFormat } = this.props;
-		// const then = moment("04 17 2020, 6:00 pm", "MM DD YYYY, h:mm a");
-        // const { thenTime } = moment(this.props.then, this.props.timeFormat);   
-        // const { timeFormat } = "MM DD YYYY, h:mm a";
-        // const then = moment(timeTillDate, timeFormat);
         this.interval = setInterval(() => { 
-            // this.setState({ then: this.props.then});
             const now = moment();
             console.log("now:" + now);
             console.log("then:" + this.props.then);

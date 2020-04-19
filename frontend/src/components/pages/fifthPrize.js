@@ -65,17 +65,25 @@ function FirstSidePrizeName() {
 
 function LastTwoPrizeName() {
     return (
-    <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
-        THE &nbsp;&nbsp;LAST TWO DIGITS&nbsp;&nbsp;PRIZE
-    </div>
+        <div className="col ltr-txt">
+        The Last Two Digits Prize
+        </div>
     );
 }
 
 function LastThreePrizeName() {
     return (
-    <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
-        THE &nbsp;&nbsp;LAST THREE DIGITS&nbsp;&nbsp;PRIZE
-    </div>
+        <div className="col ltr-txt">
+        The Last Three Digits Prize
+        </div>
+    );
+}
+
+function FirstThreePrizeName() {
+    return (
+        <div className="col ltr-txt">
+        The First Three Digits Prize
+        </div>
     );
 }
 
@@ -212,14 +220,13 @@ class FifthPrize extends Component {
         show6: undefined
       }     
         
-      this.interval = setInterval(()=>{
+    //   this.interval = setInterval(()=>{
         this.setState({
             data: this.props.data
         }) 
-        this.FirstPrize(this.state.data.first);
-        // this.OtherPrize(this.state.data.besideFirst);
-    }, 5000)
-    
+        // this.FirstPrize(this.state.data.first);
+        this.OtherPrize(this.state.data.fifth);
+    // }, 5000)    
     
 
     }
@@ -241,33 +248,42 @@ class FifthPrize extends Component {
             // setInterval(()=>{
             this.ShowNumber(data[i]);
             // },3000)
-            console.log("else")
+            // console.log(data[i])
         }     
          
     }
 
-
-    FirstThreedigitsPrize = () => {
-        
-    }
-    
-    LastThreeDigitsPrize = () => {
-        
-    }
-
-    LastTwoDigitsPrize = () => {
-        
-    }
-
     ShowNumber = (num) => {
-        this.setState({
-            show1 : num.charAt(0),
-            show2 : num.charAt(1),
-            show3 : num.charAt(2),
-            show4 : num.charAt(3),
-            show5 : num.charAt(4),
-            show6 : num.charAt(5)
-        })            
+        setInterval(()=>{
+            this.setState({
+                show1 : num.charAt(0)
+            })
+        }, 1000)
+        setInterval(()=>{
+            this.setState({
+                show2 : num.charAt(1),
+            })
+        }, 2000)
+        setInterval(()=>{
+            this.setState({
+                show3 : num.charAt(2),
+            })
+        }, 3000)
+        setInterval(()=>{
+            this.setState({
+                show4 : num.charAt(3),
+            })
+        }, 4000)
+        setInterval(()=>{
+            this.setState({
+                show5 : num.charAt(4),
+            })
+        }, 5000)
+        setInterval(()=>{
+            this.setState({
+                show6 : num.charAt(5)    
+            })
+        }, 6000)
     }
 
     ShowZero = () => {
@@ -434,31 +450,12 @@ class FifthPrize extends Component {
 
                 <div className="container">
                     <div className="row">
-                        {/* {setTimeout(()=>{
-                            console.log("set")
-                            this.ChooseShow(this.state.show1)
-                        })} */}
-                        {/* {setInterval(()=>{
-                            this.ChooseShow(this.state.show2)
-                        },1000)}
-                        {setInterval(()=>{
-                            this.ChooseShow(this.state.show3)
-                        },1000)}
-                        {setInterval(()=>{
-                            this.ChooseShow(this.state.show4)
-                        },1000)}
-                        {setInterval(()=>{
-                            this.ChooseShow(this.state.show5)
-                        },1000)}
-                        {setInterval(()=>{
-                            this.ChooseShow(this.state.show6)
-                        },1000)} */}
-                            {this.ChooseShow(this.state.show1)}
-                            {this.ChooseShow(this.state.show2)}
-                            {this.ChooseShow(this.state.show3)}
-                            {this.ChooseShow(this.state.show4)}
-                            {this.ChooseShow(this.state.show5)}
-                            {this.ChooseShow(this.state.show6)}
+                        {this.ChooseShow(this.state.show1)}
+                        {this.ChooseShow(this.state.show2)}
+                        {this.ChooseShow(this.state.show3)}
+                        {this.ChooseShow(this.state.show4)}
+                        {this.ChooseShow(this.state.show5)}
+                        {this.ChooseShow(this.state.show6)}
                     </div>                    
                 </div>
                 <div className="container">

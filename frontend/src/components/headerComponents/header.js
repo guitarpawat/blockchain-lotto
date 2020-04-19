@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './header.css'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
 
 export default class Header extends Component {
@@ -66,9 +66,6 @@ export default class Header extends Component {
         </div>
       
       </nav>
-      {/* <Route exact path="/" component={Homepage} /> */}
-      {/* <Route exact path="/draw" component={CountdownTimer} />
-      <Route path="/check" component={CheckPage} /> */}
         </Router>
       </div>
       
