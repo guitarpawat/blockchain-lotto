@@ -8,7 +8,6 @@ import moment from 'moment';
 import axios from 'axios';
 
 
-// var nextLive = null;
 class DrawPage extends Component {
 
   constructor(props) {
@@ -18,8 +17,7 @@ class DrawPage extends Component {
       isLive: false,
       full_data: [],
       nextLive: undefined,
-      number_data: [],
-      counter: 0
+      number_data: []
     }
     
   }
@@ -49,7 +47,6 @@ class DrawPage extends Component {
                           this.setState(
                             {
                               number_data: number_data,
-                              counter: this.state.counter+1
                             })
                         // }, 1000)
                         
@@ -75,7 +72,7 @@ class DrawPage extends Component {
           <div>
             <Header/>
             {/* <h1>{number_data.first}</h1> */}
-            {nextLive ? (<CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>) : <h1>...Loading...</h1>}
+            {/* {nextLive ? (<CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>) : <h1>...Loading...</h1>} */}
             {/* {this.state.isLive ? (<Fifth/>) : <h1><Rule/></h1>}   */}
             
             {/* this.state.nextLive.format("MM DD YYYY, h:mm a") */}
@@ -87,7 +84,7 @@ class DrawPage extends Component {
             {/* <Rule/>   */}
             {/* <FifthPrize count={counter}
                         number={number_data.first}/>         */}
-            {/* <FifthPrize data={number_data}/>  */}
+            <FifthPrize data={number_data}/> 
           </div>
           
       );

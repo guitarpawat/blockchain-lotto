@@ -14,57 +14,52 @@ import numQ from './image/numQ.png';
 
 function FifthPrizeName() {
     return (
-    <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
-        THE &nbsp;&nbsp;FIFTH &nbsp;&nbsp;PRIZE
-    </div>
+        <div className="col ltr-txt">
+            The 5th Prize
+        </div>
     );
 }
 
 function FourthPrizeName() {
     return (
-    <div className="container">
-        <div className="row">
-            {/* <div className="col-4"> 1 of 50</div> */}
-            <div className="col-4 offset-4 topic-txt ltr-border ltr-border-shadow">                                
-                THE &nbsp;&nbsp;4th &nbsp;&nbsp;PRIZE
-            </div>
-            {/* <div className="col-4"> 1 of 50</div> */}
-        </div>
-    </div>    
-    
-    
+        <div className="col ltr-txt">
+        The 4th Prize
+        </div>   
     );
 }
 
 function ThirdPrizeName() {
     return (
-    <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
-        THE &nbsp;&nbsp;THIRD &nbsp;&nbsp;PRIZE
-    </div>
+        <div className="col ltr-txt">
+        The 3rd Prize
+        </div>
     );
 }
 
 function SecondPrizeName() {
     return (
-    <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
-        THE &nbsp;&nbsp;SECOND &nbsp;&nbsp;PRIZE
+    // <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
+    //     THE &nbsp;&nbsp;SECOND &nbsp;&nbsp;PRIZE
+    // </div>
+    <div className="col ltr-txt">
+    The 2nd Prize
     </div>
     );
 }
 
 function FirstPrizeName() {
     return (
-    <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
-        THE &nbsp;&nbsp;FIRST &nbsp;&nbsp;PRIZE
-    </div>
+        <div className="col ltr-txt">
+        The 1st Prize
+        </div>
     );
 }
 
 function FirstSidePrizeName() {
     return (
-    <div className="col-4 topic-txt ltr-border ltr-border-shadow">                                
-        THE &nbsp;&nbsp;FIRST SIDE&nbsp;&nbsp;PRIZE
-    </div>
+        <div className="col ltr-txt">
+        The 1st Prize Neighbors
+        </div>
     );
 }
 
@@ -217,15 +212,22 @@ class FifthPrize extends Component {
         show6: undefined
       }     
         
-    setInterval(()=>{
+      this.interval = setInterval(()=>{
         this.setState({
             data: this.props.data
         }) 
-        // this.FirstPrize(this.state.data.first);
-        this.OtherPrize(this.state.data.besideFirst);
-    }, 3000)
+        this.FirstPrize(this.state.data.first);
+        // this.OtherPrize(this.state.data.besideFirst);
+    }, 5000)
+    
     
 
+    }
+
+    componentWillUnmount() {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
     }
 
     FirstPrize = (data) => {
@@ -236,7 +238,9 @@ class FifthPrize extends Component {
     OtherPrize = (data) => {
         console.log("first side ja")
         for(let i = 0; i < data.length; i++){
+            // setInterval(()=>{
             this.ShowNumber(data[i]);
+            // },3000)
             console.log("else")
         }     
          
@@ -368,6 +372,7 @@ class FifthPrize extends Component {
     
     ChooseShow = (show) => {
         let showNum = undefined;
+        
         switch (show) {
             case "1":
                 showNum = <this.ShowOne/>
@@ -375,7 +380,7 @@ class FifthPrize extends Component {
             case "2":
                 showNum = <this.ShowTwo/>
             break;
-            case "3":
+            case "3":                
                 showNum = <this.ShowThree/>
             break;
             case "4":
@@ -404,6 +409,7 @@ class FifthPrize extends Component {
             break;
         }
         return showNum;
+        
     }
   
 
@@ -412,7 +418,7 @@ class FifthPrize extends Component {
         if (prize != null) {
             prize = <FifthPrizeName/>;
           } else {
-            prize = <FourthPrizeName/>
+            prize = <FirstPrizeName/>
           }
         //   console.log("show_render: "+this.state.show1);
     
@@ -428,12 +434,31 @@ class FifthPrize extends Component {
 
                 <div className="container">
                     <div className="row">
-                        {this.ChooseShow(this.state.show1)}
-                        {this.ChooseShow(this.state.show2)}
-                        {this.ChooseShow(this.state.show3)}
-                        {this.ChooseShow(this.state.show4)}
-                        {this.ChooseShow(this.state.show5)}
-                        {this.ChooseShow(this.state.show6)}
+                        {/* {setTimeout(()=>{
+                            console.log("set")
+                            this.ChooseShow(this.state.show1)
+                        })} */}
+                        {/* {setInterval(()=>{
+                            this.ChooseShow(this.state.show2)
+                        },1000)}
+                        {setInterval(()=>{
+                            this.ChooseShow(this.state.show3)
+                        },1000)}
+                        {setInterval(()=>{
+                            this.ChooseShow(this.state.show4)
+                        },1000)}
+                        {setInterval(()=>{
+                            this.ChooseShow(this.state.show5)
+                        },1000)}
+                        {setInterval(()=>{
+                            this.ChooseShow(this.state.show6)
+                        },1000)} */}
+                            {this.ChooseShow(this.state.show1)}
+                            {this.ChooseShow(this.state.show2)}
+                            {this.ChooseShow(this.state.show3)}
+                            {this.ChooseShow(this.state.show4)}
+                            {this.ChooseShow(this.state.show5)}
+                            {this.ChooseShow(this.state.show6)}
                     </div>                    
                 </div>
                 <div className="container">
