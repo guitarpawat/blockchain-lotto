@@ -211,7 +211,6 @@ class FifthPrize extends Component {
     const {count, data} = this.props  
 
       this.state = {
-        data: undefined,
         show1: undefined,
         show2: undefined,
         show3: undefined,
@@ -220,66 +219,84 @@ class FifthPrize extends Component {
         show6: undefined
       }     
         
-    //   this.interval = setInterval(()=>{
-        this.setState({
-            data: this.props.data
-        }) 
+    //   this.interval = setTimeout(()=>{
+    //     this.setState({
+    //         data: this.props.data
+    //     }) 
         // this.FirstPrize(this.state.data.first);
-        this.OtherPrize(this.state.data.fifth);
-    // }, 5000)    
+        // console.log("lenght: "+this.state.data.fifth.length);
+        // for(let i = 0; i < this.props.data.fifth.length; i++){
+        //     setTimeout(()=>{
+        //     this.OtherPrize(this.props.data.fifth[i]);
+        //     },10000)
+        // }
+
+        let i = 0;
+        let prize = this.props.data.fifth;
+        // console.log(prize)
+        const interval = setInterval(() => {
+            this.OtherPrize(prize[i]);
+            i+=1;
+            if(i === 5){
+                // clearInterval(interval);
+                prize = this.props.data.forth;
+                i = 0;
+                if(i === 5){
+                    prize = this.props.data.third;
+                    i = 0;
+                    if(i === 5){
+                    clearInterval(interval);
+                    }
+                }               
+            }                
+        }, 10000);
+        
+        // }, 5000)    
     
 
     }
 
-    componentWillUnmount() {
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
-    }
-
     FirstPrize = (data) => {
-        console.log("first ja")
+        // console.log("first ja")
         this.ShowNumber(data);        
     }
 
     OtherPrize = (data) => {
-        console.log("first side ja")
-        for(let i = 0; i < data.length; i++){
-            // setInterval(()=>{
-            this.ShowNumber(data[i]);
-            // },3000)
-            // console.log(data[i])
-        }     
+        // console.log("first side ja")
+        setTimeout(()=>{
+        this.ShowNumber(data);
+        },10000)
+        console.log(data)
          
     }
 
     ShowNumber = (num) => {
-        setInterval(()=>{
+        setTimeout(()=>{
             this.setState({
                 show1 : num.charAt(0)
             })
         }, 1000)
-        setInterval(()=>{
+        setTimeout(()=>{
             this.setState({
                 show2 : num.charAt(1),
             })
         }, 2000)
-        setInterval(()=>{
+        setTimeout(()=>{
             this.setState({
                 show3 : num.charAt(2),
             })
         }, 3000)
-        setInterval(()=>{
+        setTimeout(()=>{
             this.setState({
                 show4 : num.charAt(3),
             })
         }, 4000)
-        setInterval(()=>{
+        setTimeout(()=>{
             this.setState({
                 show5 : num.charAt(4),
             })
         }, 5000)
-        setInterval(()=>{
+        setTimeout(()=>{
             this.setState({
                 show6 : num.charAt(5)    
             })
@@ -427,6 +444,17 @@ class FifthPrize extends Component {
         return showNum;
         
     }
+
+    // setQ = () => {
+    //     this.setState({
+    //         show1: q,
+    //         show2: q,
+    //         show3: undefined,
+    //         show4: undefined,
+    //         show5: undefined,
+    //         show6: undefined,
+    //     })
+    // }
   
 
     render() {
@@ -456,6 +484,7 @@ class FifthPrize extends Component {
                         {this.ChooseShow(this.state.show4)}
                         {this.ChooseShow(this.state.show5)}
                         {this.ChooseShow(this.state.show6)}
+                        
                     </div>                    
                 </div>
                 <div className="container">
