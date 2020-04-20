@@ -232,37 +232,87 @@ class FifthPrize extends Component {
         // }
 
         let i = 0;
-        let prize = this.props.data.fifth;
-        // console.log(prize)
-        const interval = setInterval(() => {
-            this.OtherPrize(prize[i]);
-            i+=1;
-            if(i === 5){
-                // clearInterval(interval);
-                prize = this.props.data.forth;
-                i = 0;
-                if(i === 5){
-                    prize = this.props.data.third;
-                    i = 0;
-                    if(i === 5){
-                    clearInterval(interval);
-                    }
-                }               
-            }                
-        }, 10000);
+        let j = 7;
+        let prizeF = [this.props.data.first]
+        let prizeT = [this.props.data.lastTwo]
+        let prize = [this.props.data.fifth, //0
+                    this.props.data.forth, //1
+                    this.props.data.third, //2
+                    this.props.data.second, //3
+                    this.props.data.frontThree, //4
+                    this.props.data.lastThree, //5
+                    prizeF, //6
+                    this.props.data.besideFirst, //7
+                    prizeT] //8
+        // console.log("beside :"+Array.isArray(prize[7]));
         
-        // }, 5000)    
+        const interval = setInterval(() => {
+            this.setQ();
+            //รางวัลที่1
+
+            if((j == 8)){
+                console.log(prize[j])
+                console.log(prize[j][i])
+                this.LastTwoPrize(prize[j][i])
+                setTimeout(()=>{
+                    clearInterval(interval);
+                },10000)
+            }
+            else{ //รางวัลอื่นๆ
+                this.OtherPrize(prize[j][i]);
+                i+=1;
+                if(i === prize[j].length){
+                    j+=1;
+                    i = 0;  
+                }          
+            }                      
+                  
+        }, 10000);  
     
 
     }
 
     FirstPrize = (data) => {
-        // console.log("first ja")
-        this.ShowNumber(data);        
+        this.ShowNumber(data); 
+        console.log(data);       
     }
 
+    LastTwoPrize = (data) => {
+        setTimeout(()=>{
+            this.setState({
+                show1 : undefined
+            })
+        }, 1000)
+        setTimeout(()=>{
+            this.setState({
+                show2 : undefined,
+            })
+        }, 2000)
+        setTimeout(()=>{
+            this.setState({
+                show3 : undefined,
+            })
+        }, 3000)
+        setTimeout(()=>{
+            this.setState({
+                show4 : undefined,
+            })
+        }, 4000)
+        setTimeout(()=>{
+            this.setState({
+                show5 : data.charAt(0),
+            })
+        }, 5000)
+        setTimeout(()=>{
+            this.setState({
+                show6 : data.charAt(1)    
+            })
+        }, 6000)
+        console.log("lastTwoPrize");
+    }
+    
+
     OtherPrize = (data) => {
-        // console.log("first side ja")
         setTimeout(()=>{
         this.ShowNumber(data);
         },10000)
@@ -445,16 +495,16 @@ class FifthPrize extends Component {
         
     }
 
-    // setQ = () => {
-    //     this.setState({
-    //         show1: q,
-    //         show2: q,
-    //         show3: undefined,
-    //         show4: undefined,
-    //         show5: undefined,
-    //         show6: undefined,
-    //     })
-    // }
+    setQ = () => {
+        this.setState({
+            show1: "q",
+            show2: "q",
+            show3: "q",
+            show4: "q",
+            show5: "q",
+            show6: "q",
+        })
+    }
   
 
     render() {
