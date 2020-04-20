@@ -12,6 +12,14 @@ import num9 from './image/num9.png';
 import num0 from './image/num0.png';
 import numQ from './image/numQ.png';
 
+function TitleName() {
+    return (
+        <div className="col ltr-txt">
+            The Lottery
+        </div>
+    );
+}
+
 function FifthPrizeName() {
     return (
         <div className="col ltr-txt">
@@ -200,7 +208,7 @@ function DrawingCircle() {
     );
 }
 
-
+let j = null;
 class FifthPrize extends Component {
 
     constructor(props) {
@@ -216,23 +224,15 @@ class FifthPrize extends Component {
         show3: undefined,
         show4: undefined,
         show5: undefined,
-        show6: undefined
+        show6: undefined,
+        title: undefined,
+        name: undefined,
+        rank: undefined
       }     
         
-    //   this.interval = setTimeout(()=>{
-    //     this.setState({
-    //         data: this.props.data
-    //     }) 
-        // this.FirstPrize(this.state.data.first);
-        // console.log("lenght: "+this.state.data.fifth.length);
-        // for(let i = 0; i < this.props.data.fifth.length; i++){
-        //     setTimeout(()=>{
-        //     this.OtherPrize(this.props.data.fifth[i]);
-        //     },10000)
-        // }
 
-        let i = 0;
-        let j = 5;
+        let i = 0; 
+        j = 4;       
         let prizeF = [this.props.data.first]
         let prizeT = [this.props.data.lastTwo]
         let prize = [this.props.data.fifth, //0
@@ -244,32 +244,46 @@ class FifthPrize extends Component {
                     prizeF, //6
                     this.props.data.besideFirst, //7
                     prizeT] //8
-        // console.log("beside :"+Array.isArray(prize[7]));
         
         const interval = setInterval(() => {
+            
             this.setQ();
-            //รางวัลที่1
-
+            //รางวัลเลขท้าย2ตัว
             if((j == 8)){
-                console.log(prize[j])
-                console.log(prize[j][i])
                 this.LastTwoPrize(prize[j][i])
                 setTimeout(()=>{
+                    if(i==0){
+                        j+=1;
+                        this.setState({
+                            name: j
+                        })
+                          
+                    }
                     clearInterval(interval);
                 },10000)
             }
-            else{ //รางวัลอื่นๆ
+            else{ 
                 if(j == 5){
+                    // รางวัลเลขท้าย3ตัว
                     this.LastThreePrize(prize[j][i])
+                    
                 }else{
+                    //รางวัลอื่นๆ
                     this.OtherPrize(prize[j][i]);
-                }                
+                }        
+                      
                 i+=1;
                 if(i === prize[j].length){
+                    this.setState({
+                        title: i,
+                        name: j,
+                        rank: prize[j].length
+                    })   
                     j+=1;
                     i = 0;  
                 }          
-            }                      
+            }      
+                         
                   
         }, 10000);  
     
@@ -335,17 +349,17 @@ class FifthPrize extends Component {
             this.setState({
                 show4 : data.charAt(0),
             })
-        }, 4000)
+        }, 10000)
         setTimeout(()=>{
             this.setState({
                 show5 : data.charAt(1),
             })
-        }, 5000)
+        }, 11000)
         setTimeout(()=>{
             this.setState({
                 show6 : data.charAt(2)    
             })
-        }, 6000)
+        }, 12000)
         console.log(data);
     }
     
@@ -478,18 +492,6 @@ class FifthPrize extends Component {
             </div>
         );
     }
-
-    FirstThreedigitsPrize = () => {
-        
-    }
-    
-    LastThreeDigitsPrize = () => {
-        
-    }
-
-    LastTwoDigitsPrize = () => {
-        
-    }
     
     ChooseShow = (show) => {
         let showNum = undefined;
@@ -543,21 +545,52 @@ class FifthPrize extends Component {
             show6: "q",
         })
     }
+
+    showTitle = (show) => {
+        let showNum = undefined
+        switch (show) {
+            case 0:
+                showNum = <FifthPrizeName/>
+            break;
+            case 1:
+                showNum = <FourthPrizeName/>
+            break;
+            case 2:                
+                showNum = <ThirdPrizeName/>
+            break;
+            case 3:
+                showNum = <SecondPrizeName/>
+            break;
+            case 4:
+                showNum = <FirstThreePrizeName/>
+            break;
+            case 5:
+                showNum = <LastThreePrizeName/>
+            break;
+            case 6:
+                showNum = <FirstPrizeName/>
+            break;
+            case 7:
+                showNum = <FirstSidePrizeName/>
+            break;
+            case 8:
+                showNum = <LastTwoPrizeName/>
+            break;
+            default:
+                showNum = <TitleName/>
+            break;
+        }
+        return showNum;
+    }
   
 
     render() {
-        let prize = null;
-        if (prize != null) {
-            prize = <FifthPrizeName/>;
-          } else {
-            prize = <FirstPrizeName/>
-          }
-        //   console.log("show_render: "+this.state.show1);
+        
     
         return (  
             <div>
                 <div className="container">
-                    {prize}
+                    {this.showTitle(this.state.name)}
                 </div>
 
                 <div className="container">
@@ -575,10 +608,13 @@ class FifthPrize extends Component {
                         
                     </div>                    
                 </div>
+
                 <div className="container">
-                    {/* <div class="slide-right">
-                        <p>4 of 50</p>
-                    </div> */}
+                    <div className="row rank-num">
+                        <div className="col-12">
+                            rank: {this.state.title} of {this.state.rank}
+                        </div>
+                    </div>
                 </div>
                 
                 

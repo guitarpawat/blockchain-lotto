@@ -93,6 +93,11 @@ body {
     text-align: center;
 }
 
+.rank-num {
+    margin-top: 450px;
+    text-align: right;
+  }
+
 .ltr-txt{
     font-family: "Times New Roman", Times, serif;
     font-size: 500%;

@@ -5,6 +5,10 @@
     margin-top: 50px;
     
   }
+
+  .rank-num {
+    margin-top: 450px;
+  }
   
   .ltr-border {
     background-color: transparent;
@@ -464,4 +468,5 @@
       from { top: 30px; } to { top: -30px; }
     }
   
+    
     
