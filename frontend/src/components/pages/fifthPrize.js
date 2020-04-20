@@ -232,7 +232,7 @@ class FifthPrize extends Component {
         // }
 
         let i = 0;
-        let j = 7;
+        let j = 5;
         let prizeF = [this.props.data.first]
         let prizeT = [this.props.data.lastTwo]
         let prize = [this.props.data.fifth, //0
@@ -259,7 +259,11 @@ class FifthPrize extends Component {
                 },10000)
             }
             else{ //รางวัลอื่นๆ
-                this.OtherPrize(prize[j][i]);
+                if(j == 5){
+                    this.LastThreePrize(prize[j][i])
+                }else{
+                    this.OtherPrize(prize[j][i]);
+                }                
                 i+=1;
                 if(i === prize[j].length){
                     j+=1;
@@ -309,6 +313,40 @@ class FifthPrize extends Component {
             })
         }, 6000)
         console.log("lastTwoPrize");
+    }
+
+    LastThreePrize = (data) => {
+        setTimeout(()=>{
+            this.setState({
+                show1 : undefined
+            })
+        }, 1000)
+        setTimeout(()=>{
+            this.setState({
+                show2 : undefined,
+            })
+        }, 2000)
+        setTimeout(()=>{
+            this.setState({
+                show3 : undefined,
+            })
+        }, 3000)
+        setTimeout(()=>{
+            this.setState({
+                show4 : data.charAt(0),
+            })
+        }, 4000)
+        setTimeout(()=>{
+            this.setState({
+                show5 : data.charAt(1),
+            })
+        }, 5000)
+        setTimeout(()=>{
+            this.setState({
+                show6 : data.charAt(2)    
+            })
+        }, 6000)
+        console.log(data);
     }
     
 
