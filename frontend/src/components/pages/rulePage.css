@@ -1,9 +1,9 @@
 .hr-rule {
     width: 800px;
-    height: 260px;
+    height: 530px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 130px;
+    margin-top: 40px;
     margin-bottom: auto;
     /* height: 10px; */
     background-color: transparent !important;
@@ -25,3 +25,48 @@
     text-align: center;
     line-height: 1.6;
 }  
+
+.tg{
+  border-collapse:collapse;
+  border-spacing:0;
+  border-color:#93a1a1;
+  text-align: center;
+  margin-top: 30px;
+  width: 450px;
+  height: 300px;
+
+}
+.tg td{
+  font-family: "Times New Roman", Times, serif;
+  font-size:14px;
+  padding:4px 20px;
+  border-style:solid;
+  border-width:1px;
+  overflow:hidden;
+  word-break:normal;
+  border-color:#93a1a1;
+  color:#002b36;
+  background-color: transparent;
+  font-style: italic;
+}
+.tg th{
+  font-family: "Times New Roman", Times, serif;
+  font-size:14px;
+  font-weight:normal;
+  padding:4px 20px;
+  border-style:solid;
+  border-width:1px;
+  overflow:hidden;
+  word-break:normal;
+  border-color:#93a1a1;
+  color:#fdf6e3;
+  background-color: #000000;
+  font-style: italic;
+}
+.tg .tg-0lax{
+  vertical-align:top
+}
+
+.txt-left {
+  text-align: left;
+}

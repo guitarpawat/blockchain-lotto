@@ -65,14 +65,16 @@ class DrawPage extends Component {
       console.log("num_render: "+number_data)
       console.log("nextLive: "+nextLive);
 
+      console.log("number_fifth: "+number_data.fifth);
+
       let page;
-      if((nextLive != null) && (number_data.fifth == undefined)){
-        console.log("no data")
-        page = <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>
-      } else if((nextLive != null) && (number_data.fifth != null)){
-        console.log("have data")
-        page = number_data.forth ? (<FifthPrize data={number_data}/>) : <RulePage/>
-      }
+      // if((nextLive != null) && (number_data.fifth == undefined)){
+      //   console.log("no data")
+      //   page = <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>
+      // } else if((nextLive != null) && (number_data.fifth != null)){
+      //   console.log("have data")
+      //   page = number_data.forth ? (<FifthPrize data={number_data}/>) : <RulePage/>
+      // }
 
       return (
         
@@ -81,8 +83,8 @@ class DrawPage extends Component {
             {/* <h1>{number_data.first}</h1> */}
             {/* {nextLive ? (<CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>) : <h1>...Loading...</h1>} */}
             {/* {this.state.isLive ? (<Fifth/>) : <h1><Rule/></h1>}   */}
-            
-            {page}
+            {<RulePage/>}
+            {/* {page} */}
             
           </div>
           
