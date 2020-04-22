@@ -308,7 +308,7 @@ class CheckPage extends Component {
           <div className="row">{this.getStartTime()}</div>
           {this.renderAllDates()}
           <div className="row search">
-            <form className="col form-inline justify-content-center" onSubmit={this.inquiryPrize}>
+            <form className="col form-inline justify-content-center" onSubmit={this.inquiryPrize} action="javascript:void(0);">
               <input
                 className="form-control form-control-lg mr-sm-2 search-center"
                 type="text"
