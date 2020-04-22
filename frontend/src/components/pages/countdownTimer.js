@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import './countdownTimer.css';
+import RulePage from './rulePage';
 
 class CountdownTimer extends React.Component {
 
@@ -36,6 +37,7 @@ class CountdownTimer extends React.Component {
             const seconds = countdown.format('ss');
 
             this.setState({ days, hours, minutes, seconds });
+            
         }, 1000);
     }
 
@@ -49,13 +51,30 @@ class CountdownTimer extends React.Component {
         const { days, hours, minutes, seconds } = this.state;
 
         // Mapping the date values to radius values
-        const daysRadius = mapNumber(days, 31, 0, 0, 360);
+        const daysRadius = mapNumber(days, 30, 0, 0, 360);
         const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
         const minutesRadius = mapNumber(minutes, 60, 0, 0, 360);
         const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
 
         if (!seconds) {
             return null;
+        }
+
+        if( days == "31"){
+            this.setState({
+                days: "00"
+            })
+        }
+        
+        if(days&&hours&&minutes&&seconds == "00"){
+            // this.setState({
+            //     days: "00",
+            //     hours: "00",
+            //     minutes: "00",
+            //     seconds: "00"
+            // })
+            this.componentWillUnmount();
+            return <RulePage/>
         }
 
         return (

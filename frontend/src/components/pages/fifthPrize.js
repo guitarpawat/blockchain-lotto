@@ -232,7 +232,7 @@ class FifthPrize extends Component {
         
 
         let i = 0; 
-        j = 4;       
+        j = 0;       
         let prizeF = [this.props.data.first]
         let prizeT = [this.props.data.lastTwo]
         let prize = [this.props.data.fifth, //0
@@ -289,6 +289,8 @@ class FifthPrize extends Component {
     
 
     }
+
+    
 
     FirstPrize = (data) => {
         this.ShowNumber(data); 
