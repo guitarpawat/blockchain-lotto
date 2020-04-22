@@ -60,7 +60,6 @@ class CheckPage extends Component {
   };
 
   componentDidMount() {
-    if (this.state.state !== "init") return;
     this.fetchResults()
       .then(() => this.fetchPrizes())
       .then(() => console.log(this.state.prizes))
@@ -98,7 +97,6 @@ class CheckPage extends Component {
   };
 
   renderAllDates = () => {
-    let result = this.state.results;
     if (
       !this.state.showDates ||
       !this.state.results ||
