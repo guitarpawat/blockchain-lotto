@@ -239,32 +239,32 @@ class CheckPage extends Component {
     return (
       <div>
         <Header />
-        <div className="row space-top-search">
-          <div className="col-sm-3"></div>
-          <form className="form-inline">
-            <input
-              className="form-control mr-sm-2 search-center"
-              type="search"
-              placeholder="Put the number here"
-              aria-label="Search"
-              size="50"
-              maxLength="6"
-            ></input>
-            {/* add date dropdown picker here */}
-            <button
-              className="btn btn-outline-primary my-2 my-sm-0 btn-search-space"
-              type="submit"
-            >
-              Search
-            </button>
-          </form>
-        </div>
         <div className="container">
           <div className="row">
             <div className="col ltr-txt">The Lottery Result</div>
           </div>
           <div className="row">{this.getStartTime()}</div>
           {this.renderAllDates()}
+          <div className="row search">
+            <form className="col form-inline justify-content-center">
+              <input
+                className="form-control mr-sm-2 search-center"
+                type="search"
+                placeholder="Search lottery number"
+                aria-label="Search"
+                size="30"
+                maxLength="6"
+              ></input>
+              {/* add date dropdown picker here */}
+              <button
+                className="btn btn-primary my-2 my-sm-0 btn-search-space"
+                type="submit"
+                formAction="javascript:void(0);"
+              >
+                Search
+              </button>
+            </form>
+          </div>
         </div>
         <div className="container">
           <div className="row">

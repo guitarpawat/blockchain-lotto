@@ -140,3 +140,7 @@ body {
 .clickable {
     cursor: pointer;
 }
+
+.search {
+    margin-top: 20px;
+}
