@@ -294,9 +294,7 @@ class DrawPage extends Component {
                     prizeF, //6
                     this.state.number_data.besideFirst, //7
                     prizeT] //8
-        console.log("aaa")
         const interval = setInterval(() => {
-            console.log("bbb")
             this.setQ();
             //รางวัลเลขท้าย2ตัว
             if((j == 8)){
@@ -687,7 +685,7 @@ AddArray = (data) => {
       if(number_data.fifth != (undefined || null)){      
           if(Lottery.fifth = this.AddArray(number_data.fifth)){
               console.log(Lottery)       
-                this.GetData()
+                // this.GetData()
           }  
         // Lottery.fifth = this.AddArray(number_data.fifth);
         
