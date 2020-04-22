@@ -41,7 +41,7 @@ class CheckPage extends Component {
           onClick={this.changeShowDateState}
           className="col-4 offset-4 date-txt clickable"
         >
-          "Loading..."
+          Loading...
         </div>
       );
     }
@@ -268,7 +268,7 @@ class CheckPage extends Component {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-3">
+            <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE 1st PRIZE</div>
                 <div className="card-body">{this.renderFirstPrize()}</div>
@@ -278,7 +278,7 @@ class CheckPage extends Component {
               </div>
             </div>
 
-            <div className="col-3">
+            <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE FIRST 3 DIGITS</div>
                 <div className="card-body ">{this.renderFrontThree()}</div>
@@ -286,7 +286,7 @@ class CheckPage extends Component {
               </div>
             </div>
 
-            <div className="col-3">
+            <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE LAST 3 DIGITS</div>
                 <div className="card-body ">{this.renderLastThree()}</div>
@@ -294,7 +294,7 @@ class CheckPage extends Component {
               </div>
             </div>
 
-            <div className="col-3">
+            <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE LAST 2 DIGITS</div>
                 <div className="card-body">{this.renderLastTwo()}</div>
@@ -332,6 +332,7 @@ class CheckPage extends Component {
             {this.renderFifth()}
             <div className="card-footer text-muted">2,000฿ / prizes</div>
           </div>
+          <div className="row footer"></div>
         </div>
       </div>
     );

@@ -111,7 +111,8 @@ body {
     text-transform: none;
     text-shadow: 2px 2px 2px rgb(255, 255, 255);
     text-align: center;
-    margin-top: 60px;
+    margin-top: 10px;
+    line-height: 75px;
 }
 
 .date-txt{
@@ -134,7 +135,7 @@ body {
 
 
 .card{
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .clickable {
@@ -143,4 +144,8 @@ body {
 
 .search {
     margin-top: 20px;
+}
+
+.footer {
+    margin-bottom: 20px;
 }
