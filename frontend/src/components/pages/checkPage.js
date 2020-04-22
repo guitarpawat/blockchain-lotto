@@ -10,6 +10,7 @@ class CheckPage extends Component {
     prizes: null,
     showDates: false,
     state: "init",
+    searchBox: "",
   };
 
   fetchResults = async () => {
@@ -62,7 +63,6 @@ class CheckPage extends Component {
   componentDidMount() {
     this.fetchResults()
       .then(() => this.fetchPrizes())
-      .then(() => console.log(this.state.prizes))
       .then(() => this.setState({ state: "done" }))
       .catch((err) => console.trace("error when mount component:", err));
   }
@@ -71,7 +71,6 @@ class CheckPage extends Component {
     if (this.state.state === "changed") {
       this.setState({ state: "init", showDates: false });
       this.fetchPrizes()
-        .then(() => console.log(this.state.prizes))
         .then(() => this.setState({ state: "done" }))
         .catch((err) => console.trace("error when update component:", err));
     }
@@ -102,7 +101,7 @@ class CheckPage extends Component {
       !this.state.results ||
       this.state.results.length == 0
     ) {
-      return "";
+      return null
     }
     return (
       <div className="card text-center">
@@ -235,6 +234,69 @@ class CheckPage extends Component {
     return allCol;
   };
 
+  handleSearchBoxChange = (e) => {
+    this.setState({searchBox: e.target.value})
+  }
+
+  inquiryPrize = () => {
+    const input = this.state.searchBox
+    if(!input || input.length == 0) return null
+    if(!/^\d{6}$/.test(input)) {
+      return (
+        <div className="alert alert-info check-prize" role="alert">
+          Lottery number must be 6 digits number.
+        </div>
+      )
+    }
+    const result = this.checkPrize(input)
+    if(result) {
+      return (
+        <div className="alert alert-success check-prize" role="alert">
+          Congratulations! You won the {result}.
+        </div>
+      )
+    }
+    return (
+      <div className="alert alert-warning check-prize" role="alert">
+        Sorry, you didn't won any prize. Better luck next time.
+      </div>
+    )
+  }
+
+  checkPrize = (input) => {
+    let won = []
+    const prizes = this.state.prizes
+
+    if(prizes.first == input) {
+      won.push("first prize")
+    }
+    if(prizes.besideFirst.includes(input)) {
+      won.push("beside prize")
+    }
+    if(prizes.second.includes(input)) {
+      won.push("second prize")
+    }
+    if(prizes.third.includes(input)) {
+      won.push("third prize")
+    }
+    if(prizes.forth.includes(input)) {
+      won.push("fourth prize")
+    }
+    if(prizes.fifth.includes(input)) {
+      won.push("fifth prize")
+    }
+    if(prizes.frontThree.includes(input.substring(0, 3))) {
+      won.push("front three digits prize")
+    }
+    if(prizes.lastThree.includes(input.substring(3, 6))) {
+      won.push("last three digits prize")
+    }
+    if(prizes.lastTwo.includes(input.substring(4, 6))) {
+      won.push("last two digits prize")
+    }
+    return won.join(", ")
+  }
+
   render() {
     return (
       <div>
@@ -246,32 +308,27 @@ class CheckPage extends Component {
           <div className="row">{this.getStartTime()}</div>
           {this.renderAllDates()}
           <div className="row search">
-            <form className="col form-inline justify-content-center">
+            <form className="col form-inline justify-content-center" onSubmit={this.inquiryPrize}>
               <input
                 className="form-control mr-sm-2 search-center"
-                type="search"
+                type="text"
                 placeholder="Search lottery number"
                 aria-label="Search"
                 size="30"
                 maxLength="6"
+                value={this.state.searchBox}
+                onChange={this.handleSearchBoxChange}
               ></input>
-              {/* add date dropdown picker here */}
-              <button
-                className="btn btn-primary my-2 my-sm-0 btn-search-space"
-                type="submit"
-                formAction="javascript:void(0);"
-              >
-                Search
-              </button>
             </form>
           </div>
+          {this.inquiryPrize()}
         </div>
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE 1st PRIZE</div>
-                <div className="card-body">{this.renderFirstPrize()}</div>
+                {this.renderFirstPrize()}
                 <div className="card-footer text-muted">
                   6,000,000฿ / 1 prize
                 </div>
@@ -281,7 +338,7 @@ class CheckPage extends Component {
             <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE FIRST 3 DIGITS</div>
-                <div className="card-body ">{this.renderFrontThree()}</div>
+                {this.renderFrontThree()}
                 <div className="card-footer text-muted">4,000฿ / prizes</div>
               </div>
             </div>
@@ -289,7 +346,7 @@ class CheckPage extends Component {
             <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE LAST 3 DIGITS</div>
-                <div className="card-body ">{this.renderLastThree()}</div>
+                {this.renderLastThree()}
                 <div className="card-footer text-muted">4,000฿ / prizes</div>
               </div>
             </div>
@@ -297,7 +354,7 @@ class CheckPage extends Component {
             <div className="col-lg-3 col-md-6 col-sm-12">
               <div className="card text-center">
                 <div className="card-header head-txt">THE LAST 2 DIGITS</div>
-                <div className="card-body">{this.renderLastTwo()}</div>
+                {this.renderLastTwo()}
                 <div className="card-footer text-muted">2,000฿ / prizes</div>
               </div>
             </div>
@@ -305,7 +362,7 @@ class CheckPage extends Component {
 
           <div className="card text-center">
             <div className="card-header head-txt">THE 1st PRIZE SIDE</div>
-            <div className="card-body ">{this.renderBesideFirst()}</div>
+            {this.renderBesideFirst()}
             <div className="card-footer text-muted">100,000฿ / prizes</div>
           </div>
 

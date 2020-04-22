@@ -149,3 +149,9 @@ body {
 .footer {
     margin-bottom: 20px;
 }
+
+.check-prize {
+    margin-top: 20px;
+    text-align: center;
+    font-size: medium;
+}
