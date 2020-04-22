@@ -310,7 +310,7 @@ class CheckPage extends Component {
           <div className="row search">
             <form className="col form-inline justify-content-center" onSubmit={this.inquiryPrize}>
               <input
-                className="form-control mr-sm-2 search-center"
+                className="form-control form-control-lg mr-sm-2 search-center"
                 type="text"
                 placeholder="Search lottery number"
                 aria-label="Search"

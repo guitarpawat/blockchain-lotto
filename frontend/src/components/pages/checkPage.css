@@ -1,7 +1,5 @@
 .search-center {
     text-align: center;
-    /* margin-top: 200px; */
-    margin-bottom: auto;    
 }
 
 /* .ac-margin {
@@ -153,5 +151,5 @@ body {
 .check-prize {
     margin-top: 20px;
     text-align: center;
-    font-size: medium;
+    font-size: larger;
 }
