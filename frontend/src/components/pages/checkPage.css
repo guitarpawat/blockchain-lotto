@@ -116,13 +116,13 @@ body {
 
 .date-txt{
     font-family: "Times New Roman", Times, serif;
-    font-size: 250%;
+    font-size: 200%;
     letter-spacing: 2px;
     word-spacing: 2px;
     color: rgb(0, 0, 0);
     font-weight: normal;
     text-decoration: none;
-    font-style: italic;
+    /* font-style: italic; */
     font-variant: normal;
     text-transform: none;
     text-shadow: 2px 2px 2px rgb(255, 255, 255);
@@ -135,4 +135,8 @@ body {
 
 .card{
     margin-top: 40px;
+}
+
+.clickable {
+    cursor: pointer;
 }
