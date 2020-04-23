@@ -186,11 +186,17 @@ class DrawPage extends Component {
                                         number_data: number_data,
                                     })
                                 console.log("222")
-                            })
+                                console.log(number_data.fifth)
+                                if(number_data.fifth){
+                                    this.GetData(number_data.fifth);
+                                }
+                            })                         
+                            
                     }
+                    
                     // }
                 );
-
+                
                 //  console.log("nextLive: "+this.state.nextLive);          
 
             })
@@ -201,7 +207,7 @@ class DrawPage extends Component {
     }
 
     GetData = (data) => {
-
+        console.log("Show1: "+this.state.show1);
 
         let i = 0;
         j = 0;
@@ -240,6 +246,7 @@ class DrawPage extends Component {
                 } else {
                     //รางวัลอื่นๆ
                     this.OtherPrize(data[i]);
+                    console.log("Show1: "+data[i]);
                 }
 
                 i += 1;
@@ -382,7 +389,7 @@ class DrawPage extends Component {
             )
         return (
             <div className="col-2">
-                <img className="image" src={images[show]} alt={images[images[show]]} id="num_size" />
+                <img className="image" src={images[show]} alt={images[show]} id="num_size" />
             </div>
         )
     }
@@ -427,7 +434,7 @@ class DrawPage extends Component {
         )
     }
 
-    ShowLottery = () => {
+    ShowLottery = (num1, num2, num3, num4, num5, num6) => {
         return (
             <div>
                 <div className="container">
@@ -440,12 +447,12 @@ class DrawPage extends Component {
 
                 <div className="container">
                     <div className="row">
-                        {this.ChooseShow(this.state.show1)}
-                        {this.ChooseShow(this.state.show2)}
-                        {this.ChooseShow(this.state.show3)}
-                        {this.ChooseShow(this.state.show4)}
-                        {this.ChooseShow(this.state.show5)}
-                        {this.ChooseShow(this.state.show6)}
+                        {this.ChooseShow(num1)}
+                        {this.ChooseShow(num2)}
+                        {this.ChooseShow(num3)}
+                        {this.ChooseShow(num4)}
+                        {this.ChooseShow(num5)}
+                        {this.ChooseShow(num6)}
 
                     </div>
                 </div>
@@ -486,14 +493,22 @@ class DrawPage extends Component {
                 // this.GetData(Lottery.fifth)
             }
             // Lottery.fifth = this.AddArray(number_data.fifth);
-
         }
+        console.log("show1 render: " + this.state.show1);
+        console.log("show2 render: " + this.state.show2);
+        console.log("show3 render: " + this.state.show3);
+        console.log("show4 render: " + this.state.show4);
+        console.log("show5 render: " + this.state.show5);
+        console.log("show6 render: " + this.state.show6);
+        let show = this.ShowLottery(this.state.show1, this.state.show2, this.state.show3, this.state.show4, this.state.show5, this.state.show6);
+
 
         return (
 
             <div>
                 <Header />
-                {number_data.forth ? this.ShowLottery() : <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a" />}
+                {/* Lottery.fifth[50] */}
+                {number_data.forth ?  show: <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a" />}
             </div>
 
         );
