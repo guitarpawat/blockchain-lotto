@@ -381,17 +381,21 @@ class DrawPage extends Component {
     }
 
     ChooseShow = (show) => {
-        if (typeof show !== 'number')
+        if (show == ('q' || undefined)){
             return (
                 <div className="col-2">
                     <img className="image" src={numQ} alt={'num' + show} id="num_size" />
                 </div>
             )
-        return (
-            <div className="col-2">
-                <img className="image" src={images[show]} alt={images[show]} id="num_size" />
-            </div>
-        )
+        }else{
+            console.log("choose else")
+            return (
+                <div className="col-2">
+                    <img className="image" src={images[show]} alt={images[show]} id="num_size" />
+                </div>
+            )
+        }
+        
     }
 
     setQ = () => {
@@ -447,6 +451,7 @@ class DrawPage extends Component {
 
                 <div className="container">
                     <div className="row">
+                        {console.log("num1: "+num1)}
                         {this.ChooseShow(num1)}
                         {this.ChooseShow(num2)}
                         {this.ChooseShow(num3)}
@@ -494,12 +499,6 @@ class DrawPage extends Component {
             }
             // Lottery.fifth = this.AddArray(number_data.fifth);
         }
-        console.log("show1 render: " + this.state.show1);
-        console.log("show2 render: " + this.state.show2);
-        console.log("show3 render: " + this.state.show3);
-        console.log("show4 render: " + this.state.show4);
-        console.log("show5 render: " + this.state.show5);
-        console.log("show6 render: " + this.state.show6);
         let show = this.ShowLottery(this.state.show1, this.state.show2, this.state.show3, this.state.show4, this.state.show5, this.state.show6);
 
 
