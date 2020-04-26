@@ -6,11 +6,7 @@ import RulePage from './rulePage';
 class CountdownTimer extends React.Component {
 
   constructor(props) {
-    super(props);
-
-    // console.log("props: "+props.then);
-    const { then, timeFormat } = this.props
-    
+    super(props);    
 
     this.state = {
       days: undefined,
@@ -60,13 +56,13 @@ class CountdownTimer extends React.Component {
             return null;
         }
 
-        if( days == "31"){
+        if( days === "31"){
             this.setState({
                 days: "00"
             })
         }
         
-        if(days&&hours&&minutes&&seconds == "00"){
+        if(days&&hours&&minutes&&seconds === "00"){
             // this.setState({
             //     days: "00",
             //     hours: "00",

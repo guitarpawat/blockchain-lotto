@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import './drawPage.css';
 import CountdownTimer from './countdownTimer';
-import FifthPrize from './fifthPrize';
 import Header from '../headerComponents/header.js';
 import moment from 'moment';
 import axios from 'axios';
@@ -133,9 +132,20 @@ function DrawingCircle() {
     );
 }
 
+let i = 0;
+let j = 0;
+let Lottery = {
+    fifth : undefined,
+    forth : undefined,
+    third : undefined,
+    second : undefined,
+    frontThree : undefined,
+    lastThree : undefined,
+    first : undefined,
+    besideFirst : undefined,
+    lastTwo : undefined
 
-let j = null;
-let Lottery = new Object();
+}
 class DrawPage extends Component {
 
     constructor(props) {
@@ -154,14 +164,12 @@ class DrawPage extends Component {
             show6: undefined,
             title: undefined,
             name: undefined,
-            rank: undefined,
-            lottery: []
+            rank: undefined
         }
 
     }
 
-    componentDidMount() {
-        console.log("111")
+    fetchData() {
         axios
             .get(`http://localhost:3001/api/v1/status`)
             .then(res => {
@@ -186,79 +194,85 @@ class DrawPage extends Component {
                                         number_data: number_data,
                                     })
                                 console.log("222")
-                                console.log(number_data.fifth)
-                                if(number_data.fifth){
-                                    this.GetData(number_data.fifth);
+                                // console.log(number_data.fifth)
+                                if(number_data.fifth !== undefined){
+                                    if(Lottery.fifth[50].charAt[5] !== ("-" || undefined)){
+                                        this.GetData();   
+                                        // check if ที่นี่ให้หมดทุก case แล้วแก้ GetData                                 
+                                    }
                                 }
-                            })                         
-                            
-                    }
-                    
+                            })                                                     
+                        }                    
                     // }
-                );
-                
+                );                
                 //  console.log("nextLive: "+this.state.nextLive);          
-
             })
-
-
             .catch(err => console.log(err));
-
     }
 
-    GetData = (data) => {
-        console.log("Show1: "+this.state.show1);
+    componentDidMount() {
+        this.fetchData()
+        // if(this.state.number_data.fifth !== undefined){
+        //     if(Lottery.fifth[50].charAt[5] !== ("-" || undefined)){
+        //         this.GetData();   
+        //         // check if ที่นี่ให้หมดทุก case แล้วแก้ GetData                                 
+        //     }
+        // }
+    }
 
-        let i = 0;
-        j = 0;
-        // let prizeF = [this.state.number_data.first]
-        // let prizeT = [this.state.number_data.lastTwo]
-        // let prize = [Lottery.fifth, //0
-        //             this.state.number_data.forth, //1
-        //             this.state.number_data.third, //2
-        //             this.state.number_data.second, //3
-        //             this.state.number_data.frontThree, //4
-        //             this.state.number_data.lastThree, //5
-        //             prizeF, //6
-        //             this.state.number_data.besideFirst, //7
-        //             prizeT] //8
-        //             console.log()
+    GetData = () => {
+
+        let prizeF = [Lottery.first]
+        let prizeT = [Lottery.lastTwo]
+        let prize = [Lottery.fifth, //0
+                    Lottery.forth, //1
+                    Lottery.third, //2
+                    Lottery.second, //3
+                    Lottery.frontThree, //4
+                    Lottery.lastThree, //5
+                    prizeF, //6
+                    Lottery.besideFirst, //7
+                    prizeT] //8
+
         const interval = setInterval(() => {
             this.setQ();
             //รางวัลเลขท้าย2ตัว
-            if ((j == 8)) {
-                this.LastTwoPrize(data[i])
+            if ((j === 8)) {
+                this.LastTwoPrize(prize[j][i])
                 setTimeout(() => {
-                    if (i == 0) {
+                    if (i === 0) {
                         j += 1;
-                        this.setState({
-                            name: j
-                        })
+                        // this.setState({
+                        //     name: j
+                        // })
 
                     }
                     clearInterval(interval);
                 }, 10000)
             }
             else {
-                if (j == 5) {
+                if (j === 5) {
                     // รางวัลเลขท้าย3ตัว
-                    this.LastThreePrize(data[i])
+                    this.LastThreePrize(prize[j][i])
                 } else {
                     //รางวัลอื่นๆ
-                    this.OtherPrize(data[i]);
-                    console.log("Show1: "+data[i]);
+                    this.OtherPrize(prize[j][i]);
                 }
 
                 i += 1;
-                if (i === data.length) {
-                    this.setState({
-                        title: i,
-                        name: j,
-                        rank: data.length
-                    })
+                if (i === prize[j].length) {
+                    // this.setState({
+                    //     title: i,
+                    //     name: j,
+                    //     rank: prize[j].length
+                    // })
                     j += 1;
                     i = 0;
                 }
+            }
+            if((prize[j][i] === "-") || (prize[j][i] === undefined)){
+                "fetch in get"
+                this.fetchData()
             }
 
 
@@ -381,14 +395,13 @@ class DrawPage extends Component {
     }
 
     ChooseShow = (show) => {
-        if (show == ('q' || undefined)){
+        if (show === undefined){
             return (
                 <div className="col-2">
                     <img className="image" src={numQ} alt={'num' + show} id="num_size" />
                 </div>
             )
         }else{
-            console.log("choose else")
             return (
                 <div className="col-2">
                     <img className="image" src={images[show]} alt={images[show]} id="num_size" />
@@ -400,12 +413,12 @@ class DrawPage extends Component {
 
     setQ = () => {
         this.setState({
-            show1: "q",
-            show2: "q",
-            show3: "q",
-            show4: "q",
-            show5: "q",
-            show6: "q",
+            show1: undefined,
+            show2: undefined,
+            show3: undefined,
+            show4: undefined,
+            show5: undefined,
+            show6: undefined,
         })
     }
 
@@ -430,11 +443,11 @@ class DrawPage extends Component {
         ]
 
         return (
-            <div className="col ltr-txt">
+            // <div className="col ltr-txt">
                 <div className="col ltr-txt">
                     {texts[show]}
                 </div>
-            </div>
+            // </div>
         )
     }
 
@@ -451,7 +464,6 @@ class DrawPage extends Component {
 
                 <div className="container">
                     <div className="row">
-                        {console.log("num1: "+num1)}
                         {this.ChooseShow(num1)}
                         {this.ChooseShow(num2)}
                         {this.ChooseShow(num3)}
@@ -469,6 +481,7 @@ class DrawPage extends Component {
                         </div>
                     </div>
                 </div>
+                {/* {this.fetchData()} */}
             </div>
         )
     }
@@ -490,24 +503,63 @@ class DrawPage extends Component {
         console.log("num_render: " + number_data)
         console.log("nextLive: " + nextLive);
         console.log("333")
-
-
-        if (number_data.fifth != (undefined || null)) {
-            if (Lottery.fifth = this.AddArray(number_data.fifth)) {
-                console.log(Lottery)
-                // this.GetData(Lottery.fifth)
+        
+        if(number_data.fifth !== undefined){
+            if (number_data.fifth.toString().substring(5,6) !== ('-' || undefined || null)) {
+                //ออกครบ6หลักก่อน ค่อยaddArray แล้วโชว์
+                Lottery.fifth = this.AddArray(number_data.fifth)
+                if (number_data.fifth.toString().substring(355,356) !== ('-' || undefined || null)) {
+                    Lottery.fifth = this.AddArray(number_data.fifth)
+                }
+    
             }
-            // Lottery.fifth = this.AddArray(number_data.fifth);
+        }       
+        if(number_data.forth !== undefined){
+            if (number_data.forth.toString().substring(5,6) !== ('-' || undefined || null)) {
+                Lottery.forth = this.AddArray(number_data.forth)
+            }
         }
+        if(number_data.third !== undefined){
+            if(number_data.third.toString().substring(5,6) !== ('-' || undefined || null)){
+                Lottery.third = this.AddArray(number_data.third)
+            }
+        } 
+        if(number_data.second !== undefined){
+            if(number_data.second.toString().substring(5,6) !== ('-' || undefined || null)){
+                Lottery.second = this.AddArray(number_data.second)
+            }
+        }
+        if(number_data.frontThree !== undefined){
+            if(number_data.frontThree.toString().substring(2,3) !== ('-' || undefined || null)){
+                Lottery.frontThree = this.AddArray(number_data.frontThree)
+            }
+        }
+        if(number_data.lastThree !== undefined){
+            if(number_data.lastThree.toString().substring(2,3) !== ('-' || undefined || null)){
+                Lottery.lastThree = this.AddArray(number_data.lastThree)
+            }
+        }
+        if(number_data.first !== (undefined || null)){
+                Lottery.first = number_data.first
+        }
+        if(number_data.besideFirst !== undefined){
+            if(number_data.besideFirst.toString().substring(5,6) !== ('-' || undefined || null)){
+                Lottery.besideFirst = this.AddArray(number_data.besideFirst)
+            }
+        }        
+        if(number_data.lastTwo !== (undefined || null)){
+                Lottery.lastTwo = number_data.lastTwo
+        }
+        
         let show = this.ShowLottery(this.state.show1, this.state.show2, this.state.show3, this.state.show4, this.state.show5, this.state.show6);
-
+        
 
         return (
 
             <div>
                 <Header />
                 {/* Lottery.fifth[50] */}
-                {number_data.forth ?  show: <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a" />}
+                {number_data.fifth ?  show: <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a" />}
             </div>
 
         );
