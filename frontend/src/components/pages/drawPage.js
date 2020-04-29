@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './drawPage.css';
 import CountdownTimer from './countdownTimer';
 import Header from '../headerComponents/header.js';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import moment from 'moment';
 import axios from 'axios';
 import './fifthPrize.css';
@@ -146,6 +147,7 @@ let Lottery = {
     lastTwo : undefined
 
 }
+
 class DrawPage extends Component {
 
     constructor(props) {
@@ -169,6 +171,29 @@ class DrawPage extends Component {
 
     }
 
+    fetchPrize(){
+        axios
+            // 5e707e43068877ec5e53fa55
+            // +this.state.full_data.liveId
+            .get("http://localhost:3001/api/v1/results/"+this.state.full_data.liveId)
+            .then(res => {
+                console.log(res.data)
+                const number_data = res.data;
+                this.setState(
+                    {
+                        number_data: number_data,
+                    })
+                console.log("fetch")
+                if(number_data.fifth !== undefined){
+                    if(Lottery.fifth !== undefined){
+                        if(Lottery.fifth[50].charAt[5] !== ("-" || undefined)){
+                        this.GetData();                                
+                        }
+                    }
+                }
+            })
+    }
+
     fetchData() {
         axios
             .get(`http://localhost:3001/api/v1/status`)
@@ -181,43 +206,20 @@ class DrawPage extends Component {
                         full_data,
                     },
                     () => {
-                        // if (this.state.full_data.isLive){
-                        axios
-                            // 5e707e43068877ec5e53fa55
-                            // +this.state.full_data.liveId
-                            .get("http://localhost:3001/api/v1/results/5e707e43068877ec5e53fa55")
-                            .then(res => {
-                                console.log(res.data)
-                                const number_data = res.data;
-                                this.setState(
-                                    {
-                                        number_data: number_data,
-                                    })
-                                console.log("222")
-                                // console.log(number_data.fifth)
-                                if(number_data.fifth !== undefined){
-                                    if(Lottery.fifth[50].charAt[5] !== ("-" || undefined)){
-                                        this.GetData();   
-                                        // check if ที่นี่ให้หมดทุก case แล้วแก้ GetData                                 
-                                    }
-                                }
-                            })                                                     
+                        if (this.state.full_data.isLive){
+                            this.fetchPrize()                       
                         }                    
-                    // }
+                    }
                 );                
-                //  console.log("nextLive: "+this.state.nextLive);          
+                //  console.log("nextLive: "+this.state.nextLive);  
+                     
             })
             .catch(err => console.log(err));
     }
 
     componentDidMount() {
-        this.fetchData()
-        // if(this.state.number_data.fifth !== undefined){
-        //     if(Lottery.fifth[50].charAt[5] !== ("-" || undefined)){
-        //         this.GetData();   
-        //         // check if ที่นี่ให้หมดทุก case แล้วแก้ GetData                                 
-        //     }
-        // }
+        this.interval = setInterval(() => this.fetchData(), 10000);        
+        // this.fetchData()
     }
 
     GetData = () => {
@@ -270,10 +272,10 @@ class DrawPage extends Component {
                     i = 0;
                 }
             }
-            if((prize[j][i] === "-") || (prize[j][i] === undefined)){
-                "fetch in get"
+            // if((prize[j][i] === "-") || (prize[j][i] === undefined)){
+            //     console.log("fetch in get")
                 this.fetchData()
-            }
+            // }
 
 
         }, 10000);
@@ -395,7 +397,7 @@ class DrawPage extends Component {
     }
 
     ChooseShow = (show) => {
-        if (show === undefined){
+        if ((show === undefined) || (show === "-")){
             return (
                 <div className="col-2">
                     <img className="image" src={numQ} alt={'num' + show} id="num_size" />
@@ -443,11 +445,9 @@ class DrawPage extends Component {
         ]
 
         return (
-            // <div className="col ltr-txt">
-                <div className="col ltr-txt">
-                    {texts[show]}
-                </div>
-            // </div>
+            <div className="col ltr-txt">
+                {texts[show]}
+            </div>
         )
     }
 
@@ -481,7 +481,6 @@ class DrawPage extends Component {
                         </div>
                     </div>
                 </div>
-                {/* {this.fetchData()} */}
             </div>
         )
     }
@@ -493,16 +492,15 @@ class DrawPage extends Component {
         num.forEach(function (obj) {
             dataArr.push(obj);
         });
-        //   console.log(dataArr);
         return dataArr;
     }
 
 
     render() {
         let { number_data, nextLive } = this.state
+        console.log("render")
         console.log("num_render: " + number_data)
         console.log("nextLive: " + nextLive);
-        console.log("333")
         
         if(number_data.fifth !== undefined){
             if (number_data.fifth.toString().substring(5,6) !== ('-' || undefined || null)) {
@@ -510,8 +508,7 @@ class DrawPage extends Component {
                 Lottery.fifth = this.AddArray(number_data.fifth)
                 if (number_data.fifth.toString().substring(355,356) !== ('-' || undefined || null)) {
                     Lottery.fifth = this.AddArray(number_data.fifth)
-                }
-    
+                }    
             }
         }       
         if(number_data.forth !== undefined){
@@ -552,14 +549,19 @@ class DrawPage extends Component {
         }
         
         let show = this.ShowLottery(this.state.show1, this.state.show2, this.state.show3, this.state.show4, this.state.show5, this.state.show6);
-        
+        let count;
+        if(nextLive){
+            count = <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>;
+        }else{
+            count = <LinearProgress color="secondary" />
+        }
+        //เช็คโชว์ countdown RulePage Show
 
         return (
 
             <div>
                 <Header />
-                {/* Lottery.fifth[50] */}
-                {number_data.fifth ?  show: <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a" />}
+                {number_data.fifth ?  show: count}
             </div>
 
         );
