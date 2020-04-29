@@ -166,8 +166,35 @@ class DrawPage extends Component {
             show6: undefined,
             title: undefined,
             name: undefined,
-            rank: undefined
+            rank: undefined,
+            poc: "init",
+            head: "Welcome to the lottery drawing",
         }
+
+        this.status = {
+            INIT: 0,
+            COUNT_DOWN: 1,
+            WAITING_LIVE_ID: 2,
+            FIFTH_LIVE_1: 3,
+            FIFTH_BREAK: 4,
+            FIFTH_LIVE_2: 5,
+            FORTH_BREAK: 6,
+            FORTH_LIVE: 7,
+            THIRD_BREAK: 8,
+            THIRD_LIVE: 9,
+            SECOND_BREAK: 10,
+            SECOND_LIVE: 11,
+            FIRST_BREAK: 12,
+            FIRST_LIVE: 13,
+            PARTIAL_BREAK: 14,
+            PARTIAL_LIVE: 15,
+            FINISHED: 16,
+        };
+        
+        Object.freeze(this.status);
+
+        this.currentStatus = this.status.INIT
+        this.currentIndex = 0
 
     }
 
@@ -186,9 +213,9 @@ class DrawPage extends Component {
                 console.log("fetch")
                 if(number_data.fifth !== undefined){
                     if(Lottery.fifth !== undefined){
-                        if(Lottery.fifth[50].charAt[5] !== ("-" || undefined)){
-                        this.GetData();                                
-                        }
+                        // if(Lottery.fifth[50].charAt[5] !== ("-" || undefined)){
+                        // this.GetData();                                
+                        // }
                     }
                 }
             })
@@ -217,10 +244,10 @@ class DrawPage extends Component {
             .catch(err => console.log(err));
     }
 
-    componentDidMount() {
-        this.interval = setInterval(() => this.fetchData(), 10000);        
-        // this.fetchData()
-    }
+    // componentDidMount() {
+    //     this.interval = setInterval(() => this.fetchData(), 10000);        
+    //     // this.fetchData()
+    // }
 
     GetData = () => {
 
@@ -494,77 +521,339 @@ class DrawPage extends Component {
         });
         return dataArr;
     }
+    
+    setNextStatus = (status, results) => {
+        if(this.currentStatus === this.status.INIT) {
+            if(status.isLive) {
+                if(status.liveId) {
+                    if(results.lastTwo && results.lastTwo != "" && results.lastTwo.substring(1,2) !== "-") {
+                        this.currentStatus = this.status.PARTIAL_LIVE // includes front 3, last 3 and last 2
+                    } else if(results.first && results.first != "" && results.first.substring(5,6) !== "-") {
+                        this.currentStatus = this.status.FIRST_LIVE
+                    } else if(results.second && results.second[0] && results.second[0].substring(5,6) !== "-") {
+                        this.currentStatus = this.status.SECOND_LIVE
+                    } else if(results.third && results.third[0] && results.third[0].substring(5,6) !== "-") {
+                        this.currentStatus = this.status.THIRD_LIVE
+                    } else if(results.forth && results.forth[0] && results.forth[0].substring(5,6) !== "-") {
+                        this.currentStatus = this.status.FORTH_LIVE
+                    } else if(results.fifth && results.fifth[50] && results.fifth[50].substring(5,6) !== "-") {
+                        this.currentStatus = this.status.FIFTH_LIVE_2
+                        this.currentIndex = 50
+                    } else if(results.fifth && results.fifth[0] && results.fifth[0].substring(5,6) !== "-") {
+                        this.currentStatus = this.status.FIFTH_LIVE_1
+                    } else {
+                        this.currentStatus = this.status.WAITING_LIVE_ID // impossible use case!
+                    }
+                } else {
+                    this.currentStatus = this.status.WAITING_LIVE_ID // live but no block confirmed
+                }
+            } else {
+                if(status.nextLive) {
+                    console.log(this.status.nextLive)
+                    this.currentStatus = this.status.COUNT_DOWN // waiting for live
+                } else {
+                    this.currentStatus = this.status.FINISHED // nextLive is null when drawing session finished
+                }
+            }
+        } else if(this.currentStatus === this.status.COUNT_DOWN) {
+            if(status.isLive) {
+                if(results.fifth && results.fifth[0] && results.fifth[0].substring(5,6) !== "-") {
+                    this.currentStatus = this.status.FIFTH_LIVE_1 // live started!
+                } else {
+                    this.currentStatus = this.status.WAITING_LIVE_ID // live but no block confirmed
+                }
+            } else {
+                return null // not live, continue count down
+            }
+        } else if(this.currentStatus === this.status.WAITING_LIVE_ID) {
+            if(results.fifth && results.fifth[0] && results.fifth[0].substring(5,6) !== "-") {
+                this.currentStatus = this.status.FIFTH_LIVE_1 // live started!
+            } else {
+                return null // live but no block confirmed
+            }
+        } else if(this.currentStatus === this.status.FIFTH_LIVE_1) {
+            if(this.currentIndex !== 50) {
+                return null // not finish fifth live 1 yet, fail fast
+            } else if(results.fifth && results.fifth[50] && results.fifth[50].substring(5,6) !== "-") {
+                this.currentStatus = this.status.FIFTH_LIVE_2
+            } else {
+                this.currentStatus = this.status.FIFTH_BREAK
+            }
+        } else if(this.currentStatus === this.status.FIFTH_BREAK) {
+            if(results.fifth && results.fifth[50] && results.fifth[50].substring(5,6) !== "-") {
+                this.currentStatus = this.status.FIFTH_LIVE_2
+            } else {
+                return null // fifth live 2 is not available yet
+            }
+        } else if(this.currentStatus === this.status.FIFTH_LIVE_2) {
+            if(this.currentIndex !== 100) {
+                return null // not finish fifth live 2 yet, fail fast
+            } else if(results.forth && results.forth[0] && results.forth[0].substring(5,6) !== "-") {
+                this.currentStatus = this.status.FORTH_LIVE
+                this.currentIndex = 0 // reset array index to 0
+            } else {
+                this.currentStatus = this.status.FORTH_BREAK
+            }
+        } else if(this.currentStatus === this.status.FORTH_BREAK) {
+            if(results.forth && results.forth[0] && results.forth[0].substring(5,6) !== "-") {
+                this.currentStatus = this.status.FORTH_LIVE
+                this.currentIndex = 0 // reset array index to 0
+            } else {
+                return null // forth live is not available yet
+            }
+        } else if(this.currentStatus === this.status.FORTH_LIVE) {
+            if(this.currentIndex !== 50) {
+                return null
+            } else if(results.third && results.third[0] && results.third[0].substring(5,6) !== "-") {
+                this.currentStatus = this.status.THIRD_LIVE
+                this.currentIndex = 0
+            } else {
+                this.currentStatus = this.status.THIRD_BREAK
+            }
+        } else if(this.currentStatus === this.status.THIRD_BREAK) {
+            if(results.third && results.third[0] && results.third[0].substring(5,6) !== "-") {
+                this.currentStatus = this.status.THIRD_LIVE
+                this.currentIndex = 0
+            } else {
+                return null
+            }
+        } else if(this.currentStatus === this.status.THIRD_LIVE) {
+            if(this.currentIndex !== 10) {
+                return null
+            } else if(results.second && results.second[0] && results.second[0].substring(5,6) !== "-") {
+                this.currentStatus = this.status.SECOND_LIVE
+                this.currentIndex = 0
+            } else {
+                this.currentStatus = this.status.SECOND_BREAK
+            }
+        } else if(this.currentStatus === this.status.SECOND_BREAK) {
+            if(results.second && results.second[0] && results.second[0].substring(5,6) !== "-") {
+                this.currentStatus = this.status.SECOND_LIVE
+                this.currentIndex = 0
+            } else {
+                return null
+            }
+        } else if(this.currentStatus === this.status.SECOND_LIVE) {
+            if(this.currentIndex !== 5) {
+                return null
+            } else if(results.first && results.first != "" && results.first.substring(5,6) !== "-") {
+                this.currentStatus = this.status.FIRST_LIVE
+                this.currentIndex = 0
+            } else {
+                this.currentStatus = this.status.FIRST_BREAK
+            }
+        } else if(this.currentStatus === this.status.FIRST_BREAK) {
+            if(results.first && results.first != "" && results.first.substring(5,6) !== "-") {
+                this.currentStatus = this.status.FIRST_LIVE
+                this.currentIndex = 0
+            } else {
+                return null
+            }
+        } else if(this.currentStatus === this.status.FIRST_LIVE) {
+            if(this.currentIndex !== 1) {
+                return null
+            } else if(results.lastTwo && results.lastTwo != "" && results.lastTwo.substring(1,2) !== "-") {
+                this.currentStatus = this.status.PARTIAL_LIVE
+                this.currentIndex = 0
+            } else {
+                this.currentStatus = this.status.PARTIAL_BREAK
+            }
+        } else if(this.currentStatus === this.status.PARTIAL_BREAK) {
+            if(results.lastTwo && results.lastTwo != "" && results.lastTwo.substring(1,2) !== "-") {
+                this.currentStatus = this.status.PARTIAL_LIVE
+                this.currentIndex = 0
+            } else {
+                return null
+            }
+        } else if(this.currentStatus === this.status.PARTIAL_LIVE) {
+            if(this.currentIndex !== 5) {
+                return null
+            } else {
+                this.currentStatus = this.status.FINISHED
+            }
+        } else {
+            return null // already finished, do nothing
+        }
+    
+        return this.currentStatus
+    }
+    
+    getNextNumber = (results) => {
+        if(this.currentStatus === this.status.FIFTH_LIVE_1) {
+            if(this.currentIndex === 50) return null // already finished, fail fast
+            this.setState({head: "5th Prizes"})
+            return results.fifth[this.currentIndex++]
+        } else if(this.currentStatus === this.status.FIFTH_LIVE_2) {
+            if(this.currentIndex === 100) return null
+            this.setState({head: "5th Prizes"})
+            return results.fifth[this.currentIndex++]
+        } else if(this.currentStatus === this.status.FORTH_LIVE) {
+            if(this.currentIndex === 50) return null
+            this.setState({head: "4th Prizes"})
+            return results.forth[this.currentIndex++]
+        } else if(this.currentStatus === this.status.THIRD_LIVE) {
+            if(this.currentIndex === 10) return null
+            this.setState({head: "3rd Prizes"})
+            return results.third[this.currentIndex++]
+        } else if(this.currentStatus === this.status.SECOND_LIVE) {
+            this.setState({head: "2nd Prizes"})
+            if(this.currentIndex === 5) return null
+            return results.second[this.currentIndex++]
+        } else if(this.currentStatus === this.status.FIRST_LIVE) {
+            this.setState({head: "1st Prize"})
+            if(this.currentIndex === 1) return null
+            this.currentIndex++
+            return results.first
+        } else if(this.currentStatus === this.status.PARTIAL_LIVE) {
+            if(this.currentIndex === 5) return null
+            this.currentIndex++
+            if(this.currentIndex === 1) {
+                this.setState({head: "Front 3 Digits Prizes"})
+                return results.frontThree[0]
+            }
+            if(this.currentIndex === 2) {
+                this.setState({head: "Front 3 Digits Prizes"})
+                return results.frontThree[1]
+            }
+            if(this.currentIndex === 3) {
+                this.setState({head: "Last 3 Digits Prizes"})
+                return results.lastThree[0]
+            }
+            if(this.currentIndex === 4) {
+                this.setState({head: "Last 3 Digits Prizes"})
+                return results.lastThree[1]
+            }
+            if(this.currentIndex === 5) {
+                this.setState({head: "Last 2 Digits Prize"})
+                return results.lastTwo
+            }
+        } else {
+            return null // drawing finished or just init, do nothing
+        }
+    }
+    
+
+    fetchStatus = async () => {
+        const data = await fetch("/api/v1/status")
+        return await data.json()
+    }
+
+    fetchResults = async(liveId) => {
+        const data = await fetch(`/api/v1/results/${liveId}`)
+        return await data.json()
+    } 
+
+    fetchAndRender = async() => {
+        if(this.currentStatus === this.status.FINISHED) {
+            this.setState({poc: "drawing finished", head: "Thank you for joining!"})
+            return
+        }
+        const result = this.getNextNumber(this.state.number_data)
+        if(result) {
+            this.setState({poc: result})
+            return
+        }
+        const statusData = await this.fetchStatus()
+        this.setState({full_data: statusData})
+
+        console.log(statusData)
+        
+        if(statusData.liveId) {
+            const results = await this.fetchResults(statusData.liveId)
+            this.setState({number_data: results})
+            console.log(results)
+        }
+
+        const nextStatus = this.setNextStatus(this.state.full_data, this.state.number_data)
+        if(nextStatus === this.status.COUNT_DOWN) this.setState({poc: "counting down"})
+        if(nextStatus === this.status.WAITING_LIVE_ID) this.setState({poc: "lottery drawing will be starting soon..."})
+        if(nextStatus === this.status.FIFTH_BREAK || nextStatus === this.status.FORTH_BREAK || 
+            nextStatus === this.status.THIRD_BREAK || nextStatus === this.status.SECOND_BREAK || 
+            nextStatus === this.status.FIRST_BREAK || nextStatus === this.status.PARTIAL_BREAK) {
+            this.setState({poc: "waiting for next prize"})
+        }
+    }
+
+    componentDidMount() {
+        setInterval(this.fetchAndRender, 2500)
+    }
 
 
     render() {
-        let { number_data, nextLive } = this.state
-        console.log("render")
-        console.log("num_render: " + number_data)
-        console.log("nextLive: " + nextLive);
-        
-        if(number_data.fifth !== undefined){
-            if (number_data.fifth.toString().substring(5,6) !== ('-' || undefined || null)) {
-                //ออกครบ6หลักก่อน ค่อยaddArray แล้วโชว์
-                Lottery.fifth = this.AddArray(number_data.fifth)
-                if (number_data.fifth.toString().substring(355,356) !== ('-' || undefined || null)) {
-                    Lottery.fifth = this.AddArray(number_data.fifth)
-                }    
-            }
-        }       
-        if(number_data.forth !== undefined){
-            if (number_data.forth.toString().substring(5,6) !== ('-' || undefined || null)) {
-                Lottery.forth = this.AddArray(number_data.forth)
-            }
-        }
-        if(number_data.third !== undefined){
-            if(number_data.third.toString().substring(5,6) !== ('-' || undefined || null)){
-                Lottery.third = this.AddArray(number_data.third)
-            }
-        } 
-        if(number_data.second !== undefined){
-            if(number_data.second.toString().substring(5,6) !== ('-' || undefined || null)){
-                Lottery.second = this.AddArray(number_data.second)
-            }
-        }
-        if(number_data.frontThree !== undefined){
-            if(number_data.frontThree.toString().substring(2,3) !== ('-' || undefined || null)){
-                Lottery.frontThree = this.AddArray(number_data.frontThree)
-            }
-        }
-        if(number_data.lastThree !== undefined){
-            if(number_data.lastThree.toString().substring(2,3) !== ('-' || undefined || null)){
-                Lottery.lastThree = this.AddArray(number_data.lastThree)
-            }
-        }
-        if(number_data.first !== (undefined || null)){
-                Lottery.first = number_data.first
-        }
-        if(number_data.besideFirst !== undefined){
-            if(number_data.besideFirst.toString().substring(5,6) !== ('-' || undefined || null)){
-                Lottery.besideFirst = this.AddArray(number_data.besideFirst)
-            }
-        }        
-        if(number_data.lastTwo !== (undefined || null)){
-                Lottery.lastTwo = number_data.lastTwo
-        }
-        
-        let show = this.ShowLottery(this.state.show1, this.state.show2, this.state.show3, this.state.show4, this.state.show5, this.state.show6);
-        let count;
-        if(nextLive){
-            count = <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>;
-        }else{
-            count = <LinearProgress color="secondary" />
-        }
-        //เช็คโชว์ countdown RulePage Show
-
         return (
-
             <div>
-                <Header />
-                {number_data.fifth ?  show: count}
+                <h1 className="lead">{this.state.head}</h1>
+                <h1>{this.state.poc}</h1>
             </div>
+        )
+        // let { number_data, nextLive } = this.state
+        // console.log("render")
+        // console.log("num_render: " + number_data)
+        // console.log("nextLive: " + nextLive);
+        
+        // if(number_data.fifth !== undefined){
+        //     if (number_data.fifth.toString().substring(5,6) !== ('-' || undefined || null)) {
+        //         //ออกครบ6หลักก่อน ค่อยaddArray แล้วโชว์
+        //         Lottery.fifth = this.AddArray(number_data.fifth)
+        //         if (number_data.fifth.toString().substring(355,356) !== ('-' || undefined || null)) {
+        //             Lottery.fifth = this.AddArray(number_data.fifth)
+        //         }    
+        //     }
+        // }       
+        // if(number_data.forth !== undefined){
+        //     if (number_data.forth.toString().substring(5,6) !== ('-' || undefined || null)) {
+        //         Lottery.forth = this.AddArray(number_data.forth)
+        //     }
+        // }
+        // if(number_data.third !== undefined){
+        //     if(number_data.third.toString().substring(5,6) !== ('-' || undefined || null)){
+        //         Lottery.third = this.AddArray(number_data.third)
+        //     }
+        // } 
+        // if(number_data.second !== undefined){
+        //     if(number_data.second.toString().substring(5,6) !== ('-' || undefined || null)){
+        //         Lottery.second = this.AddArray(number_data.second)
+        //     }
+        // }
+        // if(number_data.frontThree !== undefined){
+        //     if(number_data.frontThree.toString().substring(2,3) !== ('-' || undefined || null)){
+        //         Lottery.frontThree = this.AddArray(number_data.frontThree)
+        //     }
+        // }
+        // if(number_data.lastThree !== undefined){
+        //     if(number_data.lastThree.toString().substring(2,3) !== ('-' || undefined || null)){
+        //         Lottery.lastThree = this.AddArray(number_data.lastThree)
+        //     }
+        // }
+        // if(number_data.first !== (undefined || null)){
+        //         Lottery.first = number_data.first
+        // }
+        // if(number_data.besideFirst !== undefined){
+        //     if(number_data.besideFirst.toString().substring(5,6) !== ('-' || undefined || null)){
+        //         Lottery.besideFirst = this.AddArray(number_data.besideFirst)
+        //     }
+        // }        
+        // if(number_data.lastTwo !== (undefined || null)){
+        //         Lottery.lastTwo = number_data.lastTwo
+        // }
+        
+        // let show = this.ShowLottery(this.state.show1, this.state.show2, this.state.show3, this.state.show4, this.state.show5, this.state.show6);
+        // let count;
+        // if(nextLive){
+        //     count = <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>;
+        // }else{
+        //     count = <LinearProgress color="secondary" />
+        // }
+        // //เช็คโชว์ countdown RulePage Show
 
-        );
+        // return (
+
+        //     <div>
+        //         <Header />
+        //         {number_data.fifth ?  show: count}
+        //     </div>
+
+        // );
     }
 }
 

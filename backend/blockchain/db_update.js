@@ -7,6 +7,8 @@ const Constants = require('../constants');
 
 const blankResults = {result: []};
 
+let count = -1;
+
 async function updateDB() {
     let config;
     try {
@@ -17,6 +19,8 @@ async function updateDB() {
     }
 
     if(config.status !== Status.LIVE) return;
+
+    if(count < 0) count = 10;
 
     let startTime = config.nextLive.getTime();
     let result;
@@ -32,9 +36,15 @@ async function updateDB() {
     }
     let finished = saveHistory(result.results, Constants.env, startTime, config.contractAddress);
 
+    logger.mongo.debug(`count=${count}`)
     if(finished) {
         try {
-            await configurationService.updateStatus(Status.FINISHED)
+            if(count !== 0) {
+                count--;
+                return
+            }
+            count = -1;
+            await configurationService.updateStatus(Status.FINISHED);
         } catch(e) {
             logger.mongo.error('cannot update status from live to finished', e);
         }
