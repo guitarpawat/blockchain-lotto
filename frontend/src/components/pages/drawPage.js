@@ -17,6 +17,7 @@ import num8 from './image/num8.png';
 import num9 from './image/num9.png';
 import num0 from './image/num0.png';
 import numQ from './image/numQ.png';
+import RulePage from "./rulePage";
 
 const images = [num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, numQ]
 
@@ -169,6 +170,7 @@ class DrawPage extends Component {
             rank: undefined,
             poc: "init",
             head: "Welcome to the lottery drawing",
+            number: undefined
         }
 
         this.status = {
@@ -195,6 +197,7 @@ class DrawPage extends Component {
 
         this.currentStatus = this.status.INIT
         this.currentIndex = 0
+        this.nextStatus = null
 
     }
 
@@ -344,7 +347,7 @@ class DrawPage extends Component {
                 show6: data.charAt(1)
             })
         }, 6000)
-        console.log("lastTwoPrize");
+        console.log(data);
     }
 
     LastThreePrize = (data) => {
@@ -367,17 +370,51 @@ class DrawPage extends Component {
             this.setState({
                 show4: data.charAt(0),
             })
-        }, 10000)
+        }, 4000)
         setTimeout(() => {
             this.setState({
                 show5: data.charAt(1),
             })
-        }, 11000)
+        }, 5000)
         setTimeout(() => {
             this.setState({
                 show6: data.charAt(2)
             })
-        }, 12000)
+        }, 6000)
+        console.log(data);
+    }
+
+    FrontThreePrize = (data) => {
+        setTimeout(() => {
+            this.setState({
+                show1: data.charAt(0)
+            })
+        }, 1000)
+        setTimeout(() => {
+            this.setState({
+                show2: data.charAt(1),
+            })
+        }, 2000)
+        setTimeout(() => {
+            this.setState({
+                show3: data.charAt(2),
+            })
+        }, 3000)
+        setTimeout(() => {
+            this.setState({
+                show4: undefined,
+            })
+        }, 4000)
+        setTimeout(() => {
+            this.setState({
+                show5: undefined,
+            })
+        }, 5000)
+        setTimeout(() => {
+            this.setState({
+                show6: undefined
+            })
+        }, 6000)
         console.log(data);
     }
 
@@ -391,6 +428,7 @@ class DrawPage extends Component {
     }
 
     ShowNumber = (num) => {
+        console.log("in showNumber");
         setTimeout(() => {
             this.setState({
                 show1: num.charAt(0)
@@ -482,7 +520,9 @@ class DrawPage extends Component {
         return (
             <div>
                 <div className="container">
-                    {this.showTitle(this.state.name)}
+                    <div className="col ltr-txt">
+                        {this.state.head}
+                    </div>                    
                 </div>
 
                 <div className="container">
@@ -504,11 +544,24 @@ class DrawPage extends Component {
                 <div className="container">
                     <div className="row rank-num">
                         <div className="col-12">
-                            rank: {this.state.title} of {this.state.rank}
+                            prize: {this.currentIndex} of {this.state.number}
                         </div>
                     </div>
                 </div>
             </div>
+        )
+    }
+
+    ShowFinish = () => {
+        return (
+                <div className="container">
+                    <div className="col ltr-txt">
+                        {this.state.head}
+                    </div>               
+                    <div className="col poc-txt">
+                        {this.state.poc}
+                    </div>     
+                </div>
         )
     }
 
@@ -563,13 +616,13 @@ class DrawPage extends Component {
                     this.currentStatus = this.status.WAITING_LIVE_ID // live but no block confirmed
                 }
             } else {
-                return null // not live, continue count down
+                return this.currentStatus === this.status.COUNT_DOWN // not live, continue count down
             }
         } else if(this.currentStatus === this.status.WAITING_LIVE_ID) {
             if(results.fifth && results.fifth[0] && results.fifth[0].substring(5,6) !== "-") {
                 this.currentStatus = this.status.FIFTH_LIVE_1 // live started!
             } else {
-                return null // live but no block confirmed
+                return this.currentStatus === this.status.WAITING_LIVE_ID // live but no block confirmed
             }
         } else if(this.currentStatus === this.status.FIFTH_LIVE_1) {
             if(this.currentIndex !== 50) {
@@ -681,26 +734,26 @@ class DrawPage extends Component {
     getNextNumber = (results) => {
         if(this.currentStatus === this.status.FIFTH_LIVE_1) {
             if(this.currentIndex === 50) return null // already finished, fail fast
-            this.setState({head: "5th Prizes"})
+            this.setState({head: "5th Prizes", number: 100})
             return results.fifth[this.currentIndex++]
         } else if(this.currentStatus === this.status.FIFTH_LIVE_2) {
             if(this.currentIndex === 100) return null
-            this.setState({head: "5th Prizes"})
+            this.setState({head: "5th Prizes", number: 100})
             return results.fifth[this.currentIndex++]
         } else if(this.currentStatus === this.status.FORTH_LIVE) {
             if(this.currentIndex === 50) return null
-            this.setState({head: "4th Prizes"})
+            this.setState({head: "4th Prizes", number: 50})
             return results.forth[this.currentIndex++]
         } else if(this.currentStatus === this.status.THIRD_LIVE) {
             if(this.currentIndex === 10) return null
-            this.setState({head: "3rd Prizes"})
+            this.setState({head: "3rd Prizes", number: 10})
             return results.third[this.currentIndex++]
         } else if(this.currentStatus === this.status.SECOND_LIVE) {
-            this.setState({head: "2nd Prizes"})
+            this.setState({head: "2nd Prizes", number: 5})
             if(this.currentIndex === 5) return null
             return results.second[this.currentIndex++]
         } else if(this.currentStatus === this.status.FIRST_LIVE) {
-            this.setState({head: "1st Prize"})
+            this.setState({head: "1st Prize", number: 1})
             if(this.currentIndex === 1) return null
             this.currentIndex++
             return results.first
@@ -708,23 +761,23 @@ class DrawPage extends Component {
             if(this.currentIndex === 5) return null
             this.currentIndex++
             if(this.currentIndex === 1) {
-                this.setState({head: "Front 3 Digits Prizes"})
+                this.setState({head: "Front 3 Digits Prizes", number: 2})
                 return results.frontThree[0]
             }
             if(this.currentIndex === 2) {
-                this.setState({head: "Front 3 Digits Prizes"})
+                this.setState({head: "Front 3 Digits Prizes", number: 2})
                 return results.frontThree[1]
             }
             if(this.currentIndex === 3) {
-                this.setState({head: "Last 3 Digits Prizes"})
+                this.setState({head: "Last 3 Digits Prizes", number: 2})
                 return results.lastThree[0]
             }
             if(this.currentIndex === 4) {
-                this.setState({head: "Last 3 Digits Prizes"})
+                this.setState({head: "Last 3 Digits Prizes", number: 2})
                 return results.lastThree[1]
             }
             if(this.currentIndex === 5) {
-                this.setState({head: "Last 2 Digits Prize"})
+                this.setState({head: "Last 2 Digits Prize", number: 1})
                 return results.lastTwo
             }
         } else {
@@ -745,12 +798,24 @@ class DrawPage extends Component {
 
     fetchAndRender = async() => {
         if(this.currentStatus === this.status.FINISHED) {
-            this.setState({poc: "drawing finished", head: "Thank you for joining!"})
+            this.setState({poc: "... See you next drawing ...", head: "Thank you for joining!"})
             return
         }
         const result = this.getNextNumber(this.state.number_data)
         if(result) {
+            this.setQ();
             this.setState({poc: result})
+            if((this.currentStatus === this.status.PARTIAL_LIVE) && ((this.currentIndex === 1) || (this.currentIndex === 2))){ // front 3
+                this.FrontThreePrize(this.state.poc);
+            }
+            else if((this.currentStatus === this.status.PARTIAL_LIVE) && ((this.currentIndex === 3) || (this.currentIndex === 4))){// last 3
+                this.LastThreePrize(this.state.poc);
+            }
+            else if((this.currentStatus === this.status.PARTIAL_LIVE) && (this.currentIndex === 5)){ //last 2
+                this.LastTwoPrize(this.state.poc);
+            }else{
+                this.ShowNumber(this.state.poc);
+            }
             return
         }
         const statusData = await this.fetchStatus()
@@ -764,96 +829,80 @@ class DrawPage extends Component {
             console.log(results)
         }
 
-        const nextStatus = this.setNextStatus(this.state.full_data, this.state.number_data)
-        if(nextStatus === this.status.COUNT_DOWN) this.setState({poc: "counting down"})
-        if(nextStatus === this.status.WAITING_LIVE_ID) this.setState({poc: "lottery drawing will be starting soon..."})
-        if(nextStatus === this.status.FIFTH_BREAK || nextStatus === this.status.FORTH_BREAK || 
-            nextStatus === this.status.THIRD_BREAK || nextStatus === this.status.SECOND_BREAK || 
-            nextStatus === this.status.FIRST_BREAK || nextStatus === this.status.PARTIAL_BREAK) {
-            this.setState({poc: "waiting for next prize"})
+        this.nextStatus = this.setNextStatus(this.state.full_data, this.state.number_data)
+        // TODO
+        if(this.nextStatus === this.status.COUNT_DOWN) {
+            // this.setState({poc: "counting down"})
+            return <CountdownTimer then={moment(this.state.full_data.nextLive)} timeFormat="MM DD YYYY, h:mm a"/>
+        }
+        if(this.nextStatus === this.status.WAITING_LIVE_ID) {
+            // Show Rule Page
+            // this.setState({poc: "lottery drawing will be starting soon..."})
+            return <RulePage/>
+        }
+        if(this.nextStatus === this.status.FIFTH_BREAK || this.nextStatus === this.status.FORTH_BREAK || 
+            this.nextStatus === this.status.THIRD_BREAK || this.nextStatus === this.status.SECOND_BREAK || 
+            this.nextStatus === this.status.FIRST_BREAK || this.nextStatus === this.status.PARTIAL_BREAK) {
+            // this.setState({poc: "waiting for next prize"})
+            return <RulePage/>
         }
     }
 
+    ShowPage = () => {
+        console.log(this.nextStatus)
+        let count = null;
+        let wait = null;
+        if(this.currentStatus === this.status.COUNT_DOWN){
+            count = this.nextStatus
+            console.log("if count: "+count)
+            return <CountdownTimer then={moment(this.state.full_data.nextLive)} timeFormat="MM DD YYYY, h:mm a"/>
+        }else if(this.currentStatus === this.status.WAITING_LIVE_ID){
+            wait = this.nextStatus
+            console.log("if wait: "+wait)
+            return <RulePage/>
+        }else if(this.nextStatus === this.status.FIFTH_BREAK || this.nextStatus === this.status.FORTH_BREAK || 
+            this.nextStatus === this.status.THIRD_BREAK || this.nextStatus === this.status.SECOND_BREAK || 
+            this.nextStatus === this.status.FIRST_BREAK || this.nextStatus === this.status.PARTIAL_BREAK){
+            return <RulePage/>
+        }else if(this.nextStatus === this.status.FIFTH_LIVE_1 || this.nextStatus === this.status.FIFTH_LIVE_2 || 
+            this.nextStatus === this.status.FORTH_LIVE || this.nextStatus === this.status.THIRD_LIVE || 
+            this.nextStatus === this.status.SECOND_LIVE || this.nextStatus === this.status.FIRST_LIVE ||
+            this.nextStatus === this.status.PARTIAL_LIVE){
+            return this.ShowLottery(this.state.show1,this.state.show2,this.state.show3,this.state.show4,this.state.show5,this.state.show6)
+        }else if(this.nextStatus === this.status.FINISHED){
+            return this.ShowFinish()
+        }else{
+            if(count){
+                console.log("if count: "+count)
+                return <CountdownTimer then={moment(this.state.full_data.nextLive)} timeFormat="MM DD YYYY, h:mm a"/>
+            }else if(wait){
+                console.log("else wait: "+wait)
+                return <RulePage/>
+            }else{
+                console.log("else null")
+                console.log("else null count: "+count)
+                console.log("else null wait: "+wait)
+                return <LinearProgress/>
+            }
+        }
+        console.log(count)
+    }
+
     componentDidMount() {
-        setInterval(this.fetchAndRender, 2500)
+        setInterval(this.fetchAndRender, 7000)
     }
 
 
     render() {
+
         return (
             <div>
-                <h1 className="lead">{this.state.head}</h1>
-                <h1>{this.state.poc}</h1>
+                {/* <h1 className="lead">{this.state.head}</h1> */}
+                {/* <h1>{this.state.poc}</h1> */}
+                <Header/>
+                {this.ShowPage()}
             </div>
         )
-        // let { number_data, nextLive } = this.state
-        // console.log("render")
-        // console.log("num_render: " + number_data)
-        // console.log("nextLive: " + nextLive);
-        
-        // if(number_data.fifth !== undefined){
-        //     if (number_data.fifth.toString().substring(5,6) !== ('-' || undefined || null)) {
-        //         //ออกครบ6หลักก่อน ค่อยaddArray แล้วโชว์
-        //         Lottery.fifth = this.AddArray(number_data.fifth)
-        //         if (number_data.fifth.toString().substring(355,356) !== ('-' || undefined || null)) {
-        //             Lottery.fifth = this.AddArray(number_data.fifth)
-        //         }    
-        //     }
-        // }       
-        // if(number_data.forth !== undefined){
-        //     if (number_data.forth.toString().substring(5,6) !== ('-' || undefined || null)) {
-        //         Lottery.forth = this.AddArray(number_data.forth)
-        //     }
-        // }
-        // if(number_data.third !== undefined){
-        //     if(number_data.third.toString().substring(5,6) !== ('-' || undefined || null)){
-        //         Lottery.third = this.AddArray(number_data.third)
-        //     }
-        // } 
-        // if(number_data.second !== undefined){
-        //     if(number_data.second.toString().substring(5,6) !== ('-' || undefined || null)){
-        //         Lottery.second = this.AddArray(number_data.second)
-        //     }
-        // }
-        // if(number_data.frontThree !== undefined){
-        //     if(number_data.frontThree.toString().substring(2,3) !== ('-' || undefined || null)){
-        //         Lottery.frontThree = this.AddArray(number_data.frontThree)
-        //     }
-        // }
-        // if(number_data.lastThree !== undefined){
-        //     if(number_data.lastThree.toString().substring(2,3) !== ('-' || undefined || null)){
-        //         Lottery.lastThree = this.AddArray(number_data.lastThree)
-        //     }
-        // }
-        // if(number_data.first !== (undefined || null)){
-        //         Lottery.first = number_data.first
-        // }
-        // if(number_data.besideFirst !== undefined){
-        //     if(number_data.besideFirst.toString().substring(5,6) !== ('-' || undefined || null)){
-        //         Lottery.besideFirst = this.AddArray(number_data.besideFirst)
-        //     }
-        // }        
-        // if(number_data.lastTwo !== (undefined || null)){
-        //         Lottery.lastTwo = number_data.lastTwo
-        // }
-        
-        // let show = this.ShowLottery(this.state.show1, this.state.show2, this.state.show3, this.state.show4, this.state.show5, this.state.show6);
-        // let count;
-        // if(nextLive){
-        //     count = <CountdownTimer then={nextLive} timeFormat="MM DD YYYY, h:mm a"/>;
-        // }else{
-        //     count = <LinearProgress color="secondary" />
-        // }
-        // //เช็คโชว์ countdown RulePage Show
-
-        // return (
-
-        //     <div>
-        //         <Header />
-        //         {number_data.fifth ?  show: count}
-        //     </div>
-
-        // );
     }
 }
 

@@ -3,10 +3,61 @@
     margin-top: 200px;
     margin-bottom: auto;    
 }
-
-.bg-text {
-    background-color: grey;
+.ltr-txt{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 500%;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+  text-decoration: none;
+  font-style: italic;
+  font-variant: normal;
+  text-transform: none;
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 75px;
 }
+
+.poc-txt{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 250%;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+  text-decoration: none;
+  font-style: italic;
+  font-variant: normal;
+  text-transform: none;
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 75px;
+}
+
+
+.rank-num {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 100%;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+  text-decoration: none;
+  font-style: italic;
+  font-variant: normal;
+  text-transform: none;
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+  line-height: 75px;
+  margin-top: 450px;
+  text-align: right;
+}
+
+/* .bg-text {
+    background-color: grey;
+} */
 
 .topic-txt {
     font-family: "Times New Roman", Times, serif;
