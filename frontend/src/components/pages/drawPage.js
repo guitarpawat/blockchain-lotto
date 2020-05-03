@@ -5,7 +5,6 @@ import Header from '../headerComponents/header.js';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import moment from 'moment';
 import axios from 'axios';
-import './fifthPrize.css';
 import num1 from './image/num1.png';
 import num2 from './image/num2.png';
 import num3 from './image/num3.png';
@@ -29,7 +28,7 @@ function DrawingCircle() {
             <div className="col-2">
                 <div class="box">
                     <div id="balls">
-                        <div id="one" class="one ball"></div>
+                        <div id="one" class="one ball yellow-bg"></div>
                         <div id="two" class="two ball"></div>
                         <div id="three" class="three ball"></div>
                         <div id="four" class="four ball"></div>
@@ -900,7 +899,8 @@ class DrawPage extends Component {
                 {/* <h1 className="lead">{this.state.head}</h1> */}
                 {/* <h1>{this.state.poc}</h1> */}
                 <Header/>
-                {this.ShowPage()}
+                {/* {this.ShowPage()} */}
+                <DrawingCircle/>
             </div>
         )
     }
