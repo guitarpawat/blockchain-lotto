@@ -15,6 +15,8 @@ class CountdownTimer extends React.Component {
       seconds: undefined,
       then: undefined
     };    
+
+    // this.now = moment();
   }  
 //   "04 17 2020, 6:33 pm", "MM DD YYYY, h:mm a"
     componentDidMount() {
@@ -23,7 +25,7 @@ class CountdownTimer extends React.Component {
         // console.log("then_prop: "+this.props.then);
         
         this.interval = setInterval(() => { 
-            const now = moment();
+            const now = moment()
             console.log("now:" + now);
             console.log("then:" + this.props.then);
             const countdown = moment(this.props.then - now).add({hours: -31});
@@ -61,15 +63,8 @@ class CountdownTimer extends React.Component {
                 days: "00"
             })
         }
-        
-        if(days&&hours&&minutes&&seconds === "00"){
-            // this.setState({
-            //     days: "00",
-            //     hours: "00",
-            //     minutes: "00",
-            //     seconds: "00"
-            // })
-            this.componentWillUnmount();
+
+        if(moment() > this.props.then){
             return <RulePage/>
         }
 

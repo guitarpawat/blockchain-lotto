@@ -26,18 +26,18 @@ function DrawingCircle() {
         <div className="row centered">
 
             <div className="col-2">
-                <div class="box">
+                <div className="box">
                     <div id="balls">
-                        <div id="one" class="one ball yellow-bg"></div>
-                        <div id="two" class="two ball"></div>
-                        <div id="three" class="three ball"></div>
-                        <div id="four" class="four ball"></div>
-                        <div id="five" class="five ball"></div>
-                        <div id="six" class="six ball"></div>
-                        <div id="seven" class="seven ball"></div>
-                        <div id="eight" class="eight ball"></div>
-                        <div id="nine" class="nine ball"></div>
-                        <div id="zero" class="zero ball"></div>
+                        <div id="one" class="one ball yellow-bg" ></div>
+                        <div id="two" class="two ball orange-bg"></div>
+                        <div id="three" class="three ball red-bg"></div>
+                        <div id="four" class="four ball pink-bg"></div>
+                        <div id="five" class="five ball purple-bg"></div>
+                        <div id="six" class="six ball blue-bg"></div>
+                        <div id="seven" class="seven ball green-bg"></div>
+                        <div id="eight" class="eight ball brown-bg"></div>
+                        <div id="nine" class="nine ball black-bg"></div>
+                        <div id="zero" class="zero ball grey-bg"></div>
                     </div>
                 </div>
             </div>
@@ -45,16 +45,16 @@ function DrawingCircle() {
             <div class="col-2">
                 <div class="box">
                     <div id="balls">
-                        <div id="one" class="one ball"></div>
-                        <div id="two" class="two ball"></div>
-                        <div id="three" class="three ball"></div>
-                        <div id="four" class="four ball"></div>
-                        <div id="five" class="five ball"></div>
-                        <div id="six" class="six ball"></div>
-                        <div id="seven" class="seven ball"></div>
-                        <div id="eight" class="eight ball"></div>
-                        <div id="nine" class="nine ball"></div>
-                        <div id="zero" class="zero ball"></div>
+                        <div id="one" class="one ball orange-bg"></div>
+                        <div id="two" class="two ball yellow-bg"></div>
+                        <div id="three" class="three ball pink-bg"></div>
+                        <div id="four" class="four ball red-bg"></div>
+                        <div id="five" class="five ball blue-bg"></div>
+                        <div id="six" class="six ball purple-bg"></div>
+                        <div id="seven" class="seven ball brown-bg"></div>
+                        <div id="eight" class="eight ball green-bg"></div>
+                        <div id="nine" class="nine ball grey-bg"></div>
+                        <div id="zero" class="zero ball black-bg"></div>
                     </div>
                 </div>
             </div>
@@ -62,16 +62,16 @@ function DrawingCircle() {
             <div className="col-2">
                 <div class="box">
                     <div id="balls">
-                        <div id="one" class="one ball"></div>
-                        <div id="two" class="two ball"></div>
-                        <div id="three" class="three ball"></div>
-                        <div id="four" class="four ball"></div>
-                        <div id="five" class="five ball"></div>
-                        <div id="six" class="six ball"></div>
-                        <div id="seven" class="seven ball"></div>
-                        <div id="eight" class="eight ball"></div>
-                        <div id="nine" class="nine ball"></div>
-                        <div id="zero" class="zero ball"></div>
+                        <div id="one" class="one ball red-bg"></div>
+                        <div id="two" class="two ball orange-bg"></div>
+                        <div id="three" class="three ball yellow-bg"></div>
+                        <div id="four" class="four ball blue-bg"></div>
+                        <div id="five" class="five ball purple-bg"></div>
+                        <div id="six" class="six ball pink-bg"></div>
+                        <div id="seven" class="seven ball grey-bg"></div>
+                        <div id="eight" class="eight ball black-bg"></div>
+                        <div id="nine" class="nine ball brown-bg"></div>
+                        <div id="zero" class="zero ball green-bg"></div>
                     </div>
                 </div>
             </div>
@@ -80,16 +80,16 @@ function DrawingCircle() {
             <div className="col-2">
                 <div class="box">
                     <div id="balls">
-                        <div id="one" class="one ball"></div>
-                        <div id="two" class="two ball"></div>
-                        <div id="three" class="three ball"></div>
-                        <div id="four" class="four ball"></div>
-                        <div id="five" class="five ball"></div>
-                        <div id="six" class="six ball"></div>
-                        <div id="seven" class="seven ball"></div>
-                        <div id="eight" class="eight ball"></div>
-                        <div id="nine" class="nine ball"></div>
-                        <div id="zero" class="zero ball"></div>
+                        <div id="one" class="one ball grey-bg"></div>
+                        <div id="two" class="two ball black-bg"></div>
+                        <div id="three" class="three ball brown-bg"></div>
+                        <div id="four" class="four ball green-bg"></div>
+                        <div id="five" class="five ball blue-bg"></div>
+                        <div id="six" class="six ball purple-bg"></div>
+                        <div id="seven" class="seven ball pink-bg"></div>
+                        <div id="eight" class="eight ball red-bg"></div>
+                        <div id="nine" class="nine ball orange-bg"></div>
+                        <div id="zero" class="zero ball yellow-bg"></div>
                     </div>
                 </div>
             </div>
@@ -97,16 +97,16 @@ function DrawingCircle() {
             <div className="col-2">
                 <div class="box">
                     <div id="balls">
-                        <div id="one" class="one ball"></div>
-                        <div id="two" class="two ball"></div>
-                        <div id="three" class="three ball"></div>
-                        <div id="four" class="four ball"></div>
-                        <div id="five" class="five ball"></div>
-                        <div id="six" class="six ball"></div>
-                        <div id="seven" class="seven ball"></div>
-                        <div id="eight" class="eight ball"></div>
-                        <div id="nine" class="nine ball"></div>
-                        <div id="zero" class="zero ball"></div>
+                        <div id="one" class="one ball purple-bg"></div>
+                        <div id="two" class="two ball blue-bg"></div>
+                        <div id="three" class="three ball pink-bg"></div>
+                        <div id="four" class="four ball red-bg"></div>
+                        <div id="five" class="five ball orange"></div>
+                        <div id="six" class="six ball yellow-bg"></div>
+                        <div id="seven" class="seven ball grey-bg"></div>
+                        <div id="eight" class="eight ball black-bg"></div>
+                        <div id="nine" class="nine ball brown-bg"></div>
+                        <div id="zero" class="zero ball green-bg"></div>
                     </div>
                 </div>
             </div>
@@ -114,16 +114,16 @@ function DrawingCircle() {
             <div className="col-2">
                 <div class="box">
                     <div id="balls">
-                        <div id="one" class="one ball"></div>
-                        <div id="two" class="two ball"></div>
-                        <div id="three" class="three ball"></div>
-                        <div id="four" class="four ball"></div>
-                        <div id="five" class="five ball"></div>
-                        <div id="six" class="six ball"></div>
-                        <div id="seven" class="seven ball"></div>
-                        <div id="eight" class="eight ball"></div>
-                        <div id="nine" class="nine ball"></div>
-                        <div id="zero" class="zero ball"></div>
+                        <div id="one" class="one ball green-bg"></div>
+                        <div id="two" class="two ball brown-bg"></div>
+                        <div id="three" class="three ball black-bg"></div>
+                        <div id="four" class="four ball grey-bg"></div>
+                        <div id="five" class="five ball yellow-bg"></div>
+                        <div id="six" class="six ball orange-bg"></div>
+                        <div id="seven" class="seven ball red-bg"></div>
+                        <div id="eight" class="eight ball pink-bg"></div>
+                        <div id="nine" class="nine ball blue-bg"></div>
+                        <div id="zero" class="zero ball purple-bg"></div>
                     </div>
                 </div>
             </div>
@@ -131,6 +131,118 @@ function DrawingCircle() {
 
         </div>
     );
+}
+
+function DrawingSquare() {
+    return(
+        <div className="row centered">
+
+            <div className="col-2">
+                <div className="box2">
+                    <div id="balls">
+                        <div id="one" class="one ball yellow-bg" ></div>
+                        <div id="two" class="two ball orange-bg"></div>
+                        <div id="three" class="three ball red-bg"></div>
+                        <div id="four" class="four ball pink-bg"></div>
+                        <div id="five" class="five ball purple-bg"></div>
+                        <div id="six" class="six ball blue-bg"></div>
+                        <div id="seven" class="seven ball green-bg"></div>
+                        <div id="eight" class="eight ball brown-bg"></div>
+                        <div id="nine" class="nine ball black-bg"></div>
+                        <div id="zero" class="zero ball grey-bg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="box2">
+                    <div id="balls">
+                        <div id="one" class="one ball orange-bg"></div>
+                        <div id="two" class="two ball yellow-bg"></div>
+                        <div id="three" class="three ball pink-bg"></div>
+                        <div id="four" class="four ball red-bg"></div>
+                        <div id="five" class="five ball blue-bg"></div>
+                        <div id="six" class="six ball purple-bg"></div>
+                        <div id="seven" class="seven ball brown-bg"></div>
+                        <div id="eight" class="eight ball green-bg"></div>
+                        <div id="nine" class="nine ball grey-bg"></div>
+                        <div id="zero" class="zero ball black-bg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="col-2">
+                <div class="box2">
+                    <div id="balls">
+                        <div id="one" class="one ball red-bg"></div>
+                        <div id="two" class="two ball orange-bg"></div>
+                        <div id="three" class="three ball yellow-bg"></div>
+                        <div id="four" class="four ball blue-bg"></div>
+                        <div id="five" class="five ball purple-bg"></div>
+                        <div id="six" class="six ball pink-bg"></div>
+                        <div id="seven" class="seven ball grey-bg"></div>
+                        <div id="eight" class="eight ball black-bg"></div>
+                        <div id="nine" class="nine ball brown-bg"></div>
+                        <div id="zero" class="zero ball green-bg"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className="col-2">
+                <div class="box2">
+                    <div id="balls">
+                        <div id="one" class="one ball grey-bg"></div>
+                        <div id="two" class="two ball black-bg"></div>
+                        <div id="three" class="three ball brown-bg"></div>
+                        <div id="four" class="four ball green-bg"></div>
+                        <div id="five" class="five ball blue-bg"></div>
+                        <div id="six" class="six ball purple-bg"></div>
+                        <div id="seven" class="seven ball pink-bg"></div>
+                        <div id="eight" class="eight ball red-bg"></div>
+                        <div id="nine" class="nine ball orange-bg"></div>
+                        <div id="zero" class="zero ball yellow-bg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="col-2">
+                <div class="box2">
+                    <div id="balls">
+                        <div id="one" class="one ball purple-bg "></div>
+                        <div id="two" class="two ball blue-bg"></div>
+                        <div id="three" class="three ball pink-bg"></div>
+                        <div id="four" class="four ball red-bg"></div>
+                        <div id="five" class="five ball orange"></div>
+                        <div id="six" class="six ball yellow-bg"></div>
+                        <div id="seven" class="seven ball grey-bg"></div>
+                        <div id="eight" class="eight ball black-bg"></div>
+                        <div id="nine" class="nine ball brown-bg"></div>
+                        <div id="zero" class="zero ball green-bg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="col-2">
+                <div class="box2">
+                    <div id="balls">
+                        <div id="one" class="one ball green-bg"></div>
+                        <div id="two" class="two ball brown-bg"></div>
+                        <div id="three" class="three ball black-bg"></div>
+                        <div id="four" class="four ball grey-bg"></div>
+                        <div id="five" class="five ball yellow-bg"></div>
+                        <div id="six" class="six ball orange-bg"></div>
+                        <div id="seven" class="seven ball red-bg"></div>
+                        <div id="eight" class="eight ball pink-bg"></div>
+                        <div id="nine" class="nine ball blue-bg"></div>
+                        <div id="zero" class="zero ball purple-bg"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    )
 }
 
 let i = 0;
@@ -169,7 +281,8 @@ class DrawPage extends Component {
             rank: undefined,
             poc: "init",
             head: "Welcome to the lottery drawing",
-            number: undefined
+            number: undefined,
+            bounce: "c"
         }
 
         this.status = {
@@ -516,6 +629,12 @@ class DrawPage extends Component {
     }
 
     ShowLottery = (num1, num2, num3, num4, num5, num6) => {
+        let drawing = <DrawingCircle />
+        if(this.state.bounce === "c"){
+            drawing = <DrawingCircle />
+        }else{
+            drawing = <DrawingSquare/>
+        }
         return (
             <div>
                 <div className="container">
@@ -525,7 +644,7 @@ class DrawPage extends Component {
                 </div>
 
                 <div className="container">
-                    <DrawingCircle />
+                    {drawing}
                 </div>
 
                 <div className="container">
@@ -733,26 +852,26 @@ class DrawPage extends Component {
     getNextNumber = (results) => {
         if(this.currentStatus === this.status.FIFTH_LIVE_1) {
             if(this.currentIndex === 50) return null // already finished, fail fast
-            this.setState({head: "5th Prizes", number: 100})
+            this.setState({head: "5th Prizes", number: 100, bounce: "c"})
             return results.fifth[this.currentIndex++]
         } else if(this.currentStatus === this.status.FIFTH_LIVE_2) {
             if(this.currentIndex === 100) return null
-            this.setState({head: "5th Prizes", number: 100})
+            this.setState({head: "5th Prizes", number: 100, bounce: "c"})
             return results.fifth[this.currentIndex++]
         } else if(this.currentStatus === this.status.FORTH_LIVE) {
             if(this.currentIndex === 50) return null
-            this.setState({head: "4th Prizes", number: 50})
+            this.setState({head: "4th Prizes", number: 50, bounce: "s"})
             return results.forth[this.currentIndex++]
         } else if(this.currentStatus === this.status.THIRD_LIVE) {
             if(this.currentIndex === 10) return null
-            this.setState({head: "3rd Prizes", number: 10})
+            this.setState({head: "3rd Prizes", number: 10, bounce: "c"})
             return results.third[this.currentIndex++]
         } else if(this.currentStatus === this.status.SECOND_LIVE) {
-            this.setState({head: "2nd Prizes", number: 5})
+            this.setState({head: "2nd Prizes", number: 5, bounce: "s"})
             if(this.currentIndex === 5) return null
             return results.second[this.currentIndex++]
         } else if(this.currentStatus === this.status.FIRST_LIVE) {
-            this.setState({head: "1st Prize", number: 1})
+            this.setState({head: "1st Prize", number: 1, bounce: "c"})
             if(this.currentIndex === 1) return null
             this.currentIndex++
             return results.first
@@ -760,23 +879,23 @@ class DrawPage extends Component {
             if(this.currentIndex === 5) return null
             this.currentIndex++
             if(this.currentIndex === 1) {
-                this.setState({head: "Front 3 Digits Prizes", number: 2})
+                this.setState({head: "Front 3 Digits Prizes", number: 2, bounce: "s"})
                 return results.frontThree[0]
             }
             if(this.currentIndex === 2) {
-                this.setState({head: "Front 3 Digits Prizes", number: 2})
+                this.setState({head: "Front 3 Digits Prizes", number: 2, bounce: "s"})
                 return results.frontThree[1]
             }
             if(this.currentIndex === 3) {
-                this.setState({head: "Last 3 Digits Prizes", number: 2})
+                this.setState({head: "Last 3 Digits Prizes", number: 2, bounce: "c"})
                 return results.lastThree[0]
             }
             if(this.currentIndex === 4) {
-                this.setState({head: "Last 3 Digits Prizes", number: 2})
+                this.setState({head: "Last 3 Digits Prizes", number: 2, bounce: "c"})
                 return results.lastThree[1]
             }
             if(this.currentIndex === 5) {
-                this.setState({head: "Last 2 Digits Prize", number: 1})
+                this.setState({head: "Last 2 Digits Prize", number: 1, bounce: "s"})
                 return results.lastTwo
             }
         } else {
@@ -849,15 +968,12 @@ class DrawPage extends Component {
 
     ShowPage = () => {
         console.log(this.nextStatus)
-        let count = null;
-        let wait = null;
         if(this.currentStatus === this.status.COUNT_DOWN){
-            count = this.nextStatus
-            console.log("if count: "+count)
+            if(moment(this.state.full_data.nextLive) > moment()){
+                return <CountdownTimer then={moment(this.state.full_data.nextLive)} timeFormat="MM DD YYYY, h:mm a"/>                
+            }
             return <CountdownTimer then={moment(this.state.full_data.nextLive)} timeFormat="MM DD YYYY, h:mm a"/>
-        }else if(this.currentStatus === this.status.WAITING_LIVE_ID){
-            wait = this.nextStatus
-            console.log("if wait: "+wait)
+        }else if(this.currentStatus === this.status.WAITING_LIVE_ID){  
             return <RulePage/>
         }else if(this.nextStatus === this.status.FIFTH_BREAK || this.nextStatus === this.status.FORTH_BREAK || 
             this.nextStatus === this.status.THIRD_BREAK || this.nextStatus === this.status.SECOND_BREAK || 
@@ -871,20 +987,8 @@ class DrawPage extends Component {
         }else if(this.nextStatus === this.status.FINISHED){
             return this.ShowFinish()
         }else{
-            if(count){
-                console.log("if count: "+count)
-                return <CountdownTimer then={moment(this.state.full_data.nextLive)} timeFormat="MM DD YYYY, h:mm a"/>
-            }else if(wait){
-                console.log("else wait: "+wait)
-                return <RulePage/>
-            }else{
-                console.log("else null")
-                console.log("else null count: "+count)
-                console.log("else null wait: "+wait)
-                return <LinearProgress/>
-            }
+            return <LinearProgress/>
         }
-        console.log(count)
     }
 
     componentDidMount() {
@@ -899,8 +1003,7 @@ class DrawPage extends Component {
                 {/* <h1 className="lead">{this.state.head}</h1> */}
                 {/* <h1>{this.state.poc}</h1> */}
                 <Header/>
-                {/* {this.ShowPage()} */}
-                <DrawingCircle/>
+                {this.ShowPage()}
             </div>
         )
     }

@@ -161,6 +161,20 @@
     animation: moveXone 0.5s linear 0s infinite alternate, moveYone 0.5s linear 0s infinite alternate;
   }
 
+  .box2 .one{
+    /* background-color:rgb(255, 255, 93) !important; */
+    /* background-color: teal !important; */
+
+    left: 583px;
+    /* animation: bouncesss 0.3s; */
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+
+    -webkit-animation: moveXone 0.5s linear 0s infinite alternate, moveYone 0.5s linear 0s infinite alternate;
+    animation: moveXone 0.5s linear 0s infinite alternate, moveYone 0.5s linear 0s infinite alternate;
+  }
+
   @-webkit-keyframes moveXone {
     from { left: 70px; } to { right: 150px; }
   }
@@ -175,7 +189,21 @@
   }
   
   .box .two{
-    background-color: orange;
+    /* background-color: orange; */
+    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
+    left:636px;
+    /* animation: bouncess 0.3s; */
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+
+    position: absolute;
+    -webkit-animation: moveXtwo 0.5s linear 0s infinite alternate, moveYtwo 0.5s linear 0s infinite alternate;
+    animation: moveXtwo 0.5s linear 0s infinite alternate, moveYtwo 0.5s linear 0s infinite alternate;
+  }
+
+  .box2 .two{
+    /* background-color: orange; */
     /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
     left:636px;
     /* animation: bouncess 0.3s; */
@@ -202,7 +230,21 @@
   }
   
   .box .three{
-    background-color: rgb(243, 71, 71);
+    /* background-color: rgb(243, 71, 71); */
+
+    left:689px;
+    /* animation: bouncesss 0.3s; */
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+
+    position: absolute;
+    -webkit-animation: moveXthree 0.5s linear 0s infinite alternate, moveYthree 0.5s linear 0s infinite alternate;
+    animation: moveXthree 0.5s linear 0s infinite alternate, moveYthree 0.5s linear 0s infinite alternate;
+  }
+
+  .box2 .three{
+    /* background-color: rgb(243, 71, 71); */
 
     left:689px;
     /* animation: bouncesss 0.3s; */
@@ -230,7 +272,23 @@
 
   
   .box .four{
-    background-color: pink;
+    /* background-color: pink; */
+
+    left:743px;
+    /* animation: bouncessss 0.3s; */
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transition: transform 1s;
+    transform: translateX(80px);
+
+    position: absolute;
+    -webkit-animation: moveXfour 0.5s linear 0s infinite alternate, moveYfour 0.5s linear 0s infinite alternate;
+    animation: moveXfour 0.5s linear 0s infinite alternate, moveYfour 0.5s linear 0s infinite alternate;
+  }
+
+  .box2 .four{
+    /* background-color: pink; */
 
     left:743px;
     /* animation: bouncessss 0.3s; */
@@ -259,7 +317,22 @@
   }
 
   .box .five{
-    background-color: purple;
+    /* background-color: purple; */
+    left:797px;
+    /* animation: bouncessss 0.3s; */
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transition: transform 1s;
+    transform: translateX(10px);
+
+    position: absolute;
+    -webkit-animation: moveXfive 0.5s linear 0s infinite alternate, moveYfive 0.5s linear 0s infinite alternate;
+    animation: moveXfive 0.5s linear 0s infinite alternate, moveYfive 0.5s linear 0s infinite alternate;
+  }
+  
+  .box2 .five{
+    /* background-color: purple; */
     left:797px;
     /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
@@ -288,7 +361,21 @@
 
 
   .box .six{
-    background-color: rgb(62, 178, 255);
+    /* background-color: rgb(62, 178, 255); */
+    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
+    left:851px;
+    animation: bouncessss 0.3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+
+    position: absolute;
+    -webkit-animation: moveXsix 0.5s linear 0s infinite alternate, moveYsix 0.5s linear 0s infinite alternate;
+    animation: moveXsix 0.5s linear 0s infinite alternate, moveYsix 0.5s linear 0s infinite alternate;
+  }
+
+  .box2 .six{
+    /* background-color: rgb(62, 178, 255); */
     /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
     left:851px;
     animation: bouncessss 0.3s;
@@ -315,7 +402,21 @@
   }
 
   .box .seven{
-    background-color: rgb(57, 172, 57);
+    /* background-color: rgb(57, 172, 57); */
+    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
+    left:905px;
+    /* animation: bouncessss 0.3s; */
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+
+    position: absolute;
+    -webkit-animation: moveXseven 0.5s linear 0s infinite alternate, moveYseven 0.5s linear 0s infinite alternate;
+    animation: moveXseven 0.5s linear 0s infinite alternate, moveYseven 0.5s linear 0s infinite alternate;
+  }
+
+  .box2 .seven{
+    /* background-color: rgb(57, 172, 57); */
     /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
     left:905px;
     /* animation: bouncessss 0.3s; */
@@ -342,7 +443,23 @@
   }
 
   .box .eight{
-    background-color: brown;
+    /* background-color: brown; */
+    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
+    left:959px;
+    /* animation: bouncessss 0.3s; */
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transition: transform 1s;
+    transform: translateX(40px);
+
+    position: absolute;
+    -webkit-animation: moveXeight 0.5s linear 0s infinite alternate, moveYeight 0.5s linear 0s infinite alternate;
+    animation: moveXeight 0.5s linear 0s infinite alternate, moveYeight 0.5s linear 0s infinite alternate;
+  }
+
+  .box2 .eight{
+    /* background-color: brown; */
     /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
     left:959px;
     /* animation: bouncessss 0.3s; */
@@ -371,7 +488,23 @@
   }
 
   .box .nine{
-    background-color: black;
+    /* background-color: black; */
+    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
+    left:1013px;
+    animation: bouncessss 0.3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transition: transform 1s;
+    transform: translateX(40px);
+
+    position: absolute;
+    -webkit-animation: moveXnine 0.5s linear 0s infinite alternate, moveYnine 0.5s linear 0s infinite alternate;
+    animation: moveXnine 0.5s linear 0s infinite alternate, moveYnine 0.5s linear 0s infinite alternate;
+  } 
+
+  .box2 .nine{
+    /* background-color: black; */
     /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
     left:1013px;
     animation: bouncessss 0.3s;
@@ -400,7 +533,7 @@
   }
 
   .box .zero{
-    background-color: grey;
+    /* background-color: grey; */
     /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
     left:1040px;
     animation: bouncessss 0.3s;
@@ -413,7 +546,23 @@
     position: absolute;
     -webkit-animation: moveXzero 0.55s linear 0s infinite alternate, moveYzero 0.5s linear 0s infinite alternate;
     animation: moveXzero 0.5s linear 0s infinite alternate, moveYzero 0.5s linear 0s infinite alternate;
-  } 
+  }
+  
+  .box2 .zero{
+    /* background-color: grey; */
+    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
+    left:1040px;
+    animation: bouncessss 0.3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    transition: transform 1s;
+    transform: translateX(70px);
+
+    position: absolute;
+    -webkit-animation: moveXzero 0.55s linear 0s infinite alternate, moveYzero 0.5s linear 0s infinite alternate;
+    animation: moveXzero 0.5s linear 0s infinite alternate, moveYzero 0.5s linear 0s infinite alternate;
+  }
 
   @-webkit-keyframes moveXzero {
     from { right: 50px; } to { left: 80px; }
@@ -433,6 +582,43 @@
   background-color:rgb(255, 255, 93) !important;
 }
 
+  .orange-bg{
+    background-color:orange !important;
+  }
+
+  .red-bg{
+    background-color:rgb(243, 71, 71) !important;
+  }
+
+  .pink-bg{
+    background-color:pink !important;
+  }
+
+  .purple-bg{
+    background-color:purple !important;
+  }
+
+  .blue-bg{
+    background-color:rgb(62, 178, 255) !important;
+  }
+
+  .green-bg{
+    background-color:rgb(57, 172, 57) !important;
+  }
+
+  .brown-bg{
+    background-color:brown !important;
+  }
+
+  .black-bg{
+    background-color:black !important;
+  }
+
+  .grey-bg{
+    background-color:grey !important;
+  }
+
+
   /* ----------------------- ball in box ---------------------------- */
 
   .box {
@@ -449,10 +635,22 @@
     -webkit-box-shadow: inset 10px 10px 30px 22px rgba(0,0,0,0.15);
     -moz-box-shadow: inset 10px 10px 30px 22px rgba(0,0,0,0.15);
     box-shadow: inset 10px 10px 30px 22px rgba(0,0,0,0.15);
+  }
 
-    /* -webkit-box-shadow: 10px 10px 30px 22px rgb(255, 255, 255);
-    -moz-box-shadow: 10px 10px 30px 22px rgb(255, 255, 255);
-    box-shadow: 10px 10px 30px 22px rgb(255, 255, 255); */
+  .box2 {
+    background-color: transparent;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    box-shadow: inset 0 0 3px #000;
+    border-radius: 0% !important;
+    border: 1px solid #FFF;
+    overflow: hidden;
+
+    -webkit-box-shadow: inset 10px 10px 30px 22px rgba(0,0,0,0.15);
+    -moz-box-shadow: inset 10px 10px 30px 22px rgba(0,0,0,0.15);
+    box-shadow: inset 10px 10px 30px 22px rgba(0,0,0,0.15);
   }
 
 
