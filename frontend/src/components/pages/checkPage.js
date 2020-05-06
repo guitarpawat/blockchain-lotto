@@ -361,7 +361,7 @@ class CheckPage extends Component {
           </div>
 
           <div className="card text-center">
-            <div className="card-header head-txt">THE 1st PRIZE SIDE</div>
+            <div className="card-header head-txt">THE 1st NEIGHBORS PRIZE</div>
             {this.renderBesideFirst()}
             <div className="card-footer text-muted">100,000฿ / prizes</div>
           </div>
@@ -369,25 +369,25 @@ class CheckPage extends Component {
           <div className="card text-center">
             <div className="card-header head-txt">THE 2nd PRIZE</div>
             {this.renderSecond()}
-            <div className="card-footer text-muted">2,000฿ / prizes</div>
+            <div className="card-footer text-muted">200,000฿ / prizes</div>
           </div>
 
           <div className="card text-center">
             <div className="card-header head-txt">THE 3rd PRIZE</div>
             {this.renderThird()}
-            <div className="card-footer text-muted">2,000฿ / prizes</div>
+            <div className="card-footer text-muted">80,000฿ / prizes</div>
           </div>
 
           <div className="card text-center">
             <div className="card-header head-txt">THE 4th PRIZE</div>
             {this.renderForth()}
-            <div className="card-footer text-muted">2,000฿ / prizes</div>
+            <div className="card-footer text-muted">40,000฿ / prizes</div>
           </div>
 
           <div className="card text-center">
             <div className="card-header head-txt">THE 5th PRIZE</div>
             {this.renderFifth()}
-            <div className="card-footer text-muted">2,000฿ / prizes</div>
+            <div className="card-footer text-muted">20,000฿ / prizes</div>
           </div>
           <div className="row footer"></div>
         </div>

@@ -61,20 +61,24 @@ class RulePage extends Component {
                       <tr>
                         <td class="tg-0lax txt-left">First Three Digits Prize</td>
                         <td class="tg-0lax">4,000฿</td>
-                        <td class="tg-0lax">2,000</td>
+                        <td class="tg-0lax">2</td>
                       </tr>
                       <tr>
                         <td class="tg-0lax txt-left">Last Three Digits Prize</td>
                         <td class="tg-0lax">4,000฿</td>
-                        <td class="tg-0lax">2,000</td>
+                        <td class="tg-0lax">2</td>
                       </tr>
                       <tr>
                         <td class="tg-0lax txt-left">Last Two Digits Prize</td>
                         <td class="tg-0lax">2,000฿</td>
-                        <td class="tg-0lax">10,000</td>
+                        <td class="tg-0lax">1</td>
                       </tr>
                     </table>
+                    <div className="wait">... waiting for drawing {this.props.prize} ...</div>
                   </div>
+                  {/* <div className="container wait">
+                      
+                  </div> */}
                     
                                   
               </div>
