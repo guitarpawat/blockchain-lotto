@@ -135,8 +135,8 @@
   }
   
   #balls .ball{
-    width:27px;
-    height:27px;
+    width:6%;
+    height:16%;
     margin:0;
     padding:0;
     display:block;
@@ -148,11 +148,6 @@
   }
   
   .box .one{
-    /* background-color:rgb(255, 255, 93) !important; */
-    /* background-color: teal !important; */
-
-    left: 583px;
-    /* animation: bouncesss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -162,11 +157,6 @@
   }
 
   .box2 .one{
-    /* background-color:rgb(255, 255, 93) !important; */
-    /* background-color: teal !important; */
-
-    left: 583px;
-    /* animation: bouncesss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -189,10 +179,6 @@
   }
   
   .box .two{
-    /* background-color: orange; */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:636px;
-    /* animation: bouncess 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -203,10 +189,6 @@
   }
 
   .box2 .two{
-    /* background-color: orange; */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:636px;
-    /* animation: bouncess 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -230,10 +212,6 @@
   }
   
   .box .three{
-    /* background-color: rgb(243, 71, 71); */
-
-    left:689px;
-    /* animation: bouncesss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -244,10 +222,6 @@
   }
 
   .box2 .three{
-    /* background-color: rgb(243, 71, 71); */
-
-    left:689px;
-    /* animation: bouncesss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -272,10 +246,6 @@
 
   
   .box .four{
-    /* background-color: pink; */
-
-    left:743px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -288,10 +258,6 @@
   }
 
   .box2 .four{
-    /* background-color: pink; */
-
-    left:743px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -317,9 +283,6 @@
   }
 
   .box .five{
-    /* background-color: purple; */
-    left:797px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -332,9 +295,6 @@
   }
   
   .box2 .five{
-    /* background-color: purple; */
-    left:797px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -361,9 +321,6 @@
 
 
   .box .six{
-    /* background-color: rgb(62, 178, 255); */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:851px;
     animation: bouncessss 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -375,9 +332,6 @@
   }
 
   .box2 .six{
-    /* background-color: rgb(62, 178, 255); */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:851px;
     animation: bouncessss 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -402,10 +356,6 @@
   }
 
   .box .seven{
-    /* background-color: rgb(57, 172, 57); */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:905px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -416,10 +366,6 @@
   }
 
   .box2 .seven{
-    /* background-color: rgb(57, 172, 57); */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:905px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -443,10 +389,6 @@
   }
 
   .box .eight{
-    /* background-color: brown; */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:959px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -459,10 +401,6 @@
   }
 
   .box2 .eight{
-    /* background-color: brown; */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:959px;
-    /* animation: bouncessss 0.3s; */
     animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-play-state: running;
@@ -488,9 +426,6 @@
   }
 
   .box .nine{
-    /* background-color: black; */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:1013px;
     animation: bouncessss 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -504,9 +439,6 @@
   } 
 
   .box2 .nine{
-    /* background-color: black; */
-    /* background-image: linear-gradient(to top, #537895 0%, #09203f 100%); */
-    left:1013px;
     animation: bouncessss 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -623,9 +555,10 @@
 
   .box {
     background-color: transparent;
-    margin: 0 auto;
+    margin: auto;
     width: 150px;
     height: 150px;
+    margin-left: 12%;
     position: relative;
     box-shadow: inset 0 0 3px #000;
     border-radius: 50%;
@@ -642,6 +575,7 @@
     margin: 0 auto;
     width: 150px;
     height: 150px;
+    margin-left: 12%;
     position: relative;
     box-shadow: inset 0 0 3px #000;
     border-radius: 0% !important;

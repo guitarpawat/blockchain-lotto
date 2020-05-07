@@ -12,7 +12,7 @@ class Homepage extends Component {
             
             <div>              
               <div className="hr">
-              <div className="ltr-center">
+              <div className="ltr-center col">
                 <div id="dots">
                   <div id="blue" class="blue dot"></div>
                   <div id="red" class="red dot"></div>
@@ -50,6 +50,7 @@ class Homepage extends Component {
                 </AwesomeButton>
                 </div>
               </div>
+              {/* <div className="hr-bottom"></div> */}
               </div>
             </div>
             

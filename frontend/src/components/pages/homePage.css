@@ -3,15 +3,18 @@ body {
 }
 
 .hr {
-  width: 1350px;
+  width: 98%;
   height: 650px;
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
-  /* height: 10px; */
   background-color: transparent !important;
   border: 2px solid white;
+}
+
+.hr-bottom{
+  margin-bottom: 50%;
 }
 
 .Btn-Check {
@@ -26,7 +29,7 @@ body {
 
 .ltr-center {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 0%;
     margin-bottom: auto;
     
 }
@@ -37,7 +40,7 @@ body {
 }
 
 .space-top {
-    margin-top: 25px;
+    margin-top: 2%;
 }
 
 .image {
@@ -47,39 +50,38 @@ body {
     max-width: 10%;
     height: auto;
 }
-/* .image:hover {
-    transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-} */
 
 svg{
     clear:both;
   }
   
   #dots{
-    position:relative;
+    position: inherit;
     height:175px;
     width:456px;
+    /* height: 50%;
+    width: 50%; */
   }
   
   #dots .dot{
-    width:27px;
-    height:27px;
+    width:7%;
+    height:17%;
     margin:0;
     padding:0;
     display:block;
     border-radius:50%;
     position:absolute;
-    top:66px;
-    left:0px;
-    margin-top: 50px;
+    /* top:66px;
+    left:0px; */
+    margin-top: 20%;
   }
   
   #dots .blue{
     /* background-color:#3284FF; */
     /* background-image: yellow; */
     background-color: rgb(255, 255, 85);
-    left:583px;
+    /* left:583px; */
+    margin-left: 128%;
     animation: bounces 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -89,7 +91,8 @@ svg{
   #dots .red{
     /* background-color:#FF3424; */
     background-color: rgb(255, 60, 60);
-    left:636px;
+    /* left:636px; */
+    margin-left: 139%;
     animation: bouncess 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -99,7 +102,8 @@ svg{
   #dots .yellow{
     /* background-color:#FFBB00; */
     background-color: rgb(36, 192, 36);
-    left:689px;
+    /* left:689px; */
+    margin-left: 151%;
     animation: bouncesss 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -109,7 +113,8 @@ svg{
   #dots .green{
     /* background-color:#26B14C; */
     background-color: rgb(75, 75, 255);
-    left:743px;
+    /* left:743px; */
+    margin-left: 162%;
     animation: bouncessss 0.3s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
