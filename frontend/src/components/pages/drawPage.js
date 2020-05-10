@@ -318,7 +318,7 @@ class DrawPage extends Component {
         axios
             // 5e707e43068877ec5e53fa55
             // +this.state.full_data.liveId
-            .get("http://localhost:3001/api/v1/results/"+this.state.full_data.liveId)
+            .get("http://localhost:3000/api/v1/results/"+this.state.full_data.liveId)
             .then(res => {
                 console.log(res.data)
                 const number_data = res.data;
@@ -339,7 +339,7 @@ class DrawPage extends Component {
 
     fetchData() {
         axios
-            .get(`http://localhost:3001/api/v1/status`)
+            .get(`http://localhost:3000/api/v1/status`)
             .then(res => {
                 console.log(res.data);
                 const full_data = res.data;

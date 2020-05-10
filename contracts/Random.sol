@@ -40,29 +40,29 @@ contract Random {
         nextBlock = block.number + 1;
     }
 
-    function combine(
-        uint8 block1,
-        uint8 block2,
-        uint8 block3,
-        uint8 block4,
-        uint8 block5,
-        uint8 block6,
-        uint8 block7,
-        uint8 block8,
-        uint8 block9,
-        uint8 block10,
-        uint8 block11,
-        uint8 block12
-    ) public pure returns(uint24) {
-        uint24 digit1 = (block1 % 5) + (5 * (block2 % 2));
-        uint24 digit2 = (block3 % 5) + (5 * (block4 % 2));
-        uint24 digit3 = (block5 % 5) + (5 * (block6 % 2));
-        uint24 digit4 = (block7 % 5) + (5 * (block8 % 2));
-        uint24 digit5 = (block9 % 5) + (5 * (block10 % 2));
-        uint24 digit6 = (block11 % 5) + (5 * (block12 % 2));
+    // function combine(
+    //     uint8 block1,
+    //     uint8 block2,
+    //     uint8 block3,
+    //     uint8 block4,
+    //     uint8 block5,
+    //     uint8 block6,
+    //     uint8 block7,
+    //     uint8 block8,
+    //     uint8 block9,
+    //     uint8 block10,
+    //     uint8 block11,
+    //     uint8 block12
+    // ) public pure returns(uint24) {
+    //     uint24 digit1 = (block1 % 5) + (5 * (block2 % 2));
+    //     uint24 digit2 = (block3 % 5) + (5 * (block4 % 2));
+    //     uint24 digit3 = (block5 % 5) + (5 * (block6 % 2));
+    //     uint24 digit4 = (block7 % 5) + (5 * (block8 % 2));
+    //     uint24 digit5 = (block9 % 5) + (5 * (block10 % 2));
+    //     uint24 digit6 = (block11 % 5) + (5 * (block12 % 2));
 
-        return (digit1 * 100000) + (digit2 * 10000) + (digit3 * 1000) + (digit4 * 100) + (digit5 * 10) + digit6;
-    }
+    //     return (digit1 * 100000) + (digit2 * 10000) + (digit3 * 1000) + (digit4 * 100) + (digit5 * 10) + digit6;
+    // }
 
     event Result(uint8 offset, uint8 i, uint8 result1, uint8 result2, uint8 result3, uint8 result4, uint8 result5);
 }
