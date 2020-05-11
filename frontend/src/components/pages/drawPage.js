@@ -863,7 +863,7 @@ class DrawPage extends Component {
     getNextNumber = (results) => {
         if(this.currentStatus === this.status.FIFTH_LIVE_1) {
             if(this.currentIndex === 50) return null // already finished, fail fast
-            this.setState({head: "5th Prizes", number: 100, bounce: "c", prize: "4th Prizes"})
+            this.setState({head: "5th Prizes", number: 100, bounce: "c", prize: "5th Prizes"})
             return results.fifth[this.currentIndex++]
         } else if(this.currentStatus === this.status.FIFTH_LIVE_2) {
             if(this.currentIndex === 100) return null
